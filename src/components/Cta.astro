@@ -1,0 +1,50 @@
+---
+---
+<section class="cta section--padded">
+  <div class="container cta__inner">
+    <h2 class="cta__title">Готовы обсудить проект?</h2>
+    <p class="cta__subtitle">Расскажите о задаче — разберёмся вместе и предложим подходящее решение.</p>
+    <a href="/kontakty" class="cta__btn">Связаться с нами</a>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--color-bg-secondary);
+  }
+
+  .cta__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-md);
+  }
+
+  .cta__title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    max-width: var(--container-sm);
+  }
+
+  .cta__subtitle {
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .cta__btn {
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-full);
+    transition: var(--transition-bg), transform var(--transition-base);
+  }
+
+  .cta__btn:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+interface Props {
+  items: { label: string; href: string }[]
+}
+const {items} = Astro.props;
+const breadcrumbItems  = items.map((el, i) => {
+  return {
+    '@type': "ListItem",
+    'position': i + 1,
+    'name': el.label,
+    'item': new URL(el.href, Astro.site)
+  }
+})
+const breadcrumbSchema={
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbItems
+}
+---
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}/>
+<div class="container">
+<nav class="breadcrumbs container">
+  {items.map((el, index) => (
+    index === items.length - 1
+      ? <span>{el.label}</span>
+      : <a href={el.href}>{el.label}</a>
+  ))}
+</nav>
+</div>
+
+<style>
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-lg);
+  }
+
+  .breadcrumbs a {
+    color: var(--color-text-secondary);
+    transition: var(--transition-color);
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .breadcrumbs a:not(:last-child)::after {
+    content: '→';
+    margin-left: var(--space-xs);
+    color: var(--color-divider);
+  }
+</style>

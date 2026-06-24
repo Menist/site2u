@@ -1,0 +1,144 @@
+---
+---
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__overlay"></div>
+  <div class="hero__container">
+    <div class="container hero__content">
+      <h1 class="hero__title">Сайты для бизнеса в Беларуси</h1>
+      <p class="hero__subtitle">Создаём сайты услуг, лендинги, сайты-визитки и промо-сайты, которые находят клиентов в
+        Google и Яндекс с первого дня после запуска</p>
+      <a href="/kontakty" class="hero__cta">Обсудить проект</a>
+    </div>
+    <a href="#services" class="hero__arrow" aria-label="Перейти к услугам">
+      <span class="hero__arrow-icon"></span>
+    </a>
+  </div>
+</section>
+
+<script>
+  import '../scripts/hero-motion.js';
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+
+  .hero__bg {
+    position: absolute;
+    inset: -70px 0;
+    background-color: #16213e;
+    background-image: url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    transform: translateY(var(--hero-bg-shift-y, 0px));
+    will-change: transform, opacity;
+    z-index: 0;
+  }
+
+  .hero__bg.loaded {
+    opacity: 1; /* показываем фон */
+  }
+  .hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero__arrow {
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    bottom: 38px;
+    transform: translateX(-50%);
+  }
+
+  .hero__arrow:hover .hero__arrow-icon {
+    border-color: var(--color-accent);
+  }
+
+  .hero__arrow-icon {
+    transition: border-color var(--transition-base);
+  }
+
+  .hero__arrow-icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-right: 3px solid var(--color-white);
+    border-bottom: 3px solid var(--color-white);
+    transform: rotate(45deg);
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: -70px 0;
+    background: var(--color-overlay-dark);
+    z-index: 1;
+    transform: translateY(var(--hero-overlay-shift-y, 0px));
+    opacity: var(--hero-overlay-opacity, 1);
+    will-change: transform, opacity;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--color-white);
+    transform: translateY(var(--hero-content-shift-y, 0px));
+    will-change: transform;
+  }
+
+  .hero__title {
+    font-size: clamp(42px, 3.8vw, 72px);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-relaxed);
+    max-width: var(--container-sm);
+    margin: 0 auto var(--space-lg);
+  }
+
+  .hero__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 290px;
+    height: 60px;
+    padding: 0 var(--space-xl);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-accent);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+    transition: var(--transition-bg), var(--transition-transform);
+  }
+
+  .hero__cta:hover {
+    background: var(--color-accent-hover);
+  }
+</style>
+<script>
+  import '../scripts/hero-motion.js';
+</script>

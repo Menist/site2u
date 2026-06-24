@@ -1,0 +1,86 @@
+---
+import ServiceCard from './ServiceCard.astro';
+---
+<section class="services section--padded" id="services">
+  <div class="container">
+    <div class="services__header">
+      <h2 class="section-heading">Наши услуги</h2>
+      <p class="section-heading__subtitle">
+        За site2u.by стоит компания с многолетней историей
+      </p>
+    </div>
+
+    <div class="services__grid">
+      <ServiceCard
+          title="Лендинг"
+          forText="кафе, салонов, мероприятий и промо-страниц"
+          items={[
+            'Адаптивный дизайн под все устройства',
+            'Оптимизация загрузки страницы',
+            'Форма заявки или кнопка в мессенджер',
+            'Настройка целей — чтобы видеть, сколько людей оставляют заявки'
+          ]}
+          term="Срок зависит от объёма и макета"
+          btnText="Обсудить лендинг"
+          btnHref="/uslugi/landing"
+      >
+        <svg slot="icon" width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="56" height="48" rx="4" stroke="#ffbe49" stroke-width="2.5" fill="none"/>
+          <line x1="4" y1="20" x2="60" y2="20" stroke="#ffbe49" stroke-width="2"/>
+          <rect x="12" y="28" width="16" height="20" rx="2" stroke="#ffbe49" stroke-width="2" fill="none"/>
+          <line x1="36" y1="28" x2="52" y2="28" stroke="#ffbe49" stroke-width="2"/>
+          <line x1="36" y1="36" x2="52" y2="36" stroke="#ffbe49" stroke-width="2"/>
+          <line x1="36" y1="44" x2="46" y2="44" stroke="#ffbe49" stroke-width="2"/>
+          <circle cx="12" cy="14" r="2" fill="#ffbe49"/>
+          <circle cx="20" cy="14" r="2" fill="#ffbe49"/>
+          <circle cx="28" cy="14" r="2" fill="#ffbe49"/>
+        </svg>
+      </ServiceCard>
+
+      <ServiceCard
+          title="Корпоративный сайт"
+          forText="клиник, студий, агентств"
+          items={[
+            'Несколько страниц: о нас, услуги, контакты',
+            'CMS — меняете тексты и фото самостоятельно',
+            'Google Analytics и Яндекс.Метрика',
+            'Настройка целей — отслеживание действий клиентов'
+          ]}
+          term="Срок обсуждается индивидуально"
+          btnText="Обсудить сайт"
+          btnHref="/uslugi/corporate-site"
+          primary={true}
+      >
+        <svg slot="icon" width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="10" width="56" height="36" rx="4" stroke="#ffbe49" stroke-width="2.5" fill="none"/>
+          <line x1="24" y1="46" x2="40" y2="46" stroke="#ffbe49" stroke-width="2.5"/>
+          <line x1="32" y1="46" x2="32" y2="54" stroke="#ffbe49" stroke-width="2.5"/>
+          <line x1="22" y1="54" x2="42" y2="54" stroke="#ffbe49" stroke-width="2.5"/>
+          <line x1="4" y1="38" x2="60" y2="38" stroke="#ffbe49" stroke-width="2"/>
+          <circle cx="32" cy="24" r="8" stroke="#ffbe49" stroke-width="2" fill="none"/>
+          <line x1="32" y1="18" x2="32" y2="30" stroke="#ffbe49" stroke-width="1.5"/>
+          <line x1="26" y1="24" x2="38" y2="24" stroke="#ffbe49" stroke-width="1.5"/>
+        </svg>
+      </ServiceCard>
+    </div>
+  </div>
+</section>
+
+<style>
+
+  .services__subtitle {
+
+  }
+
+  .services__grid {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  @media (max-width: 768px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

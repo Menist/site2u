@@ -1,0 +1,119 @@
+---
+const features = [
+  {
+    title: 'Видимость в поиске',
+    description: 'Сайт подготовлен так, чтобы поисковые системы могли корректно читать, индексировать и понимать его структуру.',
+    items: [
+      'Видимость в Google и Яндексе',
+      'Контент, который видят поисковые системы',
+      'Структурированные данные для поиска и AI-сервисов (Schema.org)',
+      'Карта сайта для индексации'
+    ]
+  },
+  {
+    title: 'Производительность сайта',
+    description: 'Сайт оптимизирован для быстрой загрузки, стабильной работы и доверия с первого посещения.',
+    items: [
+      'Быстрая загрузка',
+      'Высокие показатели скорости (PageSpeed)',
+      'Защищённое соединение (HTTPS)',
+      'Современные технологии вместо устаревших шаблонов'
+    ]
+  },
+  {
+    title: 'Управление контентом',
+    description: 'Контент, заявки и статистика остаются под вашим контролем после запуска.',
+    items: [
+      'Управление текстами и фото без помощи разработчика (CMS)',
+      'Подключение аналитики',
+      'Отслеживание заявок',
+      'Простое обновление контента'
+    ]
+  },
+];
+---
+<section class="advantages section--padded">
+  <div class="container">
+    <h2 class="section-heading">Что входит в разработку сайта</h2>
+    <p class="section-heading__subtitle">Каждый сайт включает невидимые слои, которые помогают ему находиться в поиске, быстро загружаться, собирать заявки и оставаться удобным в управлении после запуска.</p>
+
+    <div class="advantages__grid">
+      {features.map((feature) => (
+          <div class="advantages__card">
+            <h3 class="advantages__title">{feature.title}</h3>
+            <p class="advantages__description">{feature.description}</p>
+            <ul class="advantages__list">
+              {feature.items.map((item) => (
+                  <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .advantages__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    .advantages__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .advantages__card {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: var(--transition-transform), box-shadow var(--transition-base);
+  }
+
+  .advantages__card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .advantages__title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .advantages__description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .advantages__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-left: 0;
+  }
+
+  .advantages__list li {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    padding-left: var(--space-sm);
+    position: relative;
+  }
+
+  .advantages__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: var(--radius-circle);
+    background: var(--color-accent);
+  }
+</style>

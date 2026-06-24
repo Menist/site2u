@@ -1,0 +1,239 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Faq from '../../components/Faq.astro';
+const  serviceSchema={
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Разработка лендинга",
+  "name": "Разработка лендинга на заказ",
+  "description": "Разработка адаптивного лендинга с формой заявки, оптимизацией скорости загрузки и настройкой целей для отслеживания заявок",
+  "provider": {
+    "@type": "Organization",
+    "name": "site2u.by"
+  },
+  "areaServed": "BY"
+}
+const breadcrumbItems = [
+  {label: "Главная", href: "/"},
+  {label: "Услуги", href: "/uslugi"},
+  {label: "Лендинг", href: "/uslugi/landing"}
+];
+
+const faqItems = [
+  { question: 'Нужен ли мне домен заранее?', answer: 'Нет, поможем подобрать и купить домен и хостинг.' },
+  { question: 'Кто пишет тексты для сайта?', answer: 'Тексты предоставляет клиент.' },
+  { question: 'Можно ли потом добавить страницы к лендингу?', answer: 'Да, лендинг можно расширить до многостраничного сайта.' },
+  { question: 'Нужно ли SEO для лендинга?', answer: 'Не обязательно, особенно если трафик идёт с рекламы — подключаем по запросу.' }
+];
+---
+<Layout title="Разработка лендинга на заказ в Беларуси | site2u.by"
+        description="Адаптивный лендинг с формой заявки и оптимизацией" serviceSchema={serviceSchema}>
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <div class="service-detail container">
+    <div class="service-detail__heading-block">
+      <h1 class="page-heading">Лендинг под рекламную кампанию или акцию</h1>
+      <span class="service-detail__rule"></span>
+    </div>
+
+    <p class="service-detail__lead">
+      Лендинг нужен для конкретной задачи: запуск рекламной кампании, отдельная акция, разовое мероприятие.
+      Одна страница, один чёткий призыв к действию — человек, пришедший по рекламе, не теряется и оставляет заявку.
+    </p>
+
+    <section class="service-features">
+      <h2 class="block-heading">Что вы получаете</h2>
+      <div class="service-features__grid">
+        <div class="feature-item">
+          <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>Сайт одинаково удобно открывается с телефона и компьютера</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>Быстрая загрузка страницы — реклама не сливает бюджет на людей, которые не дождались сайта</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>Понятная форма заявки или кнопка в мессенджер</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>Видно, сколько людей реально оставляют заявки, а не только сколько было переходов</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-design">
+      <h2 class="block-heading">Работа с дизайном</h2>
+      <div class="service-design__grid">
+        <div class="design-option">
+          <h3>Если у вас уже есть макет</h3>
+          <p>Соберём сайт точно по макету — без лишних созвонов и согласований.</p>
+        </div>
+        <div class="design-option">
+          <h3>Если макета нет</h3>
+          <p>Подключим дизайнера, согласуем дизайн до начала разработки.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-detail__block">
+      <h2 class="block-heading">SEO — по согласованию</h2>
+      <p>Для рекламного лендинга органическое SEO обычно не нужно — трафик уже идёт с рекламы. Если важно, чтобы сайт находили в поиске сам по себе, подключаем SEO-оптимизацию отдельно.</p>
+    </section>
+
+    <section class="service-stats">
+      <div class="stat-block">
+        <span class="stat-block__number">5–10</span>
+        <span class="stat-block__label">дней на разработку</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-block__number">100%</span>
+        <span class="stat-block__label">оплата по факту готовой работы</span>
+      </div>
+    </section>
+
+    <section class="service-detail__block">
+      <h2 class="block-heading">После запуска</h2>
+      <p>Остаёмся на связи и консультируем по сайту.</p>
+    </section>
+    <Faq items={faqItems} />
+  </div>
+</Layout>
+
+<style>
+  .service-detail {
+    padding: var(--space-3xl) 0;
+  }
+
+  .service-detail__lead {
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    max-width: var(--container-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .service-detail__heading {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-sm);
+  }
+
+  .service-detail__block {
+    max-width: var(--container-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .service-detail__block p {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .service-features {
+    margin-bottom: var(--space-xl);
+  }
+
+  .service-features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .feature-item,
+  .design-option{
+    transition: var(--transition-transform), box-shadow var(--transition-base);
+  }
+
+  .feature-item:hover,
+  .design-option:hover,
+  .stat-block:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+  }
+
+  @media (max-width: 768px) {
+    .service-features__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+  }
+
+  .feature-item__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: var(--color-accent-hover);
+  }
+
+  .feature-item p {
+    margin: 0;
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+  }
+
+  .service-design {
+    margin-bottom: var(--space-xl);
+  }
+
+  .service-design__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+  .service-detail__rule {
+    display: block;
+    width: 130px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-sm);
+  }
+
+  @media (max-width: 768px) {
+    .service-design__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .design-option {
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+  }
+
+  .design-option h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-xs);
+  }
+
+  .design-option p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+  }
+
+  .service-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+</style>

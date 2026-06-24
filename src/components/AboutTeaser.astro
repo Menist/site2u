@@ -1,0 +1,76 @@
+---
+const stats = [
+  { number: '2001', label: 'год основания IMC Computers' },
+  { number: '24+', label: 'года на рынке Беларуси' },
+  { number: '3', label: 'направления внутри компании' },
+  { number: 'B2B', label: 'фокус на бизнес-клиентов' }
+];
+---
+<section class="about-teaser section--padded">
+  <div class="container">
+    <h2 class="section-heading">О нас </h2>
+    <p class="section-heading__subtitle">Веб-направление <a href="https://www.imc.by" target="_blank" rel="noopener" class="about-page__link" data-astro-cid-zhe6yam7="">IMC Computers</a>— создаём сайты, которые работают на бизнес, а не просто красиво выглядят</p>
+    <div class="about-teaser__grid">
+      <div class="about-teaser__text">
+        <h3 class="block-heading">Делаем сайты для бизнеса — с теплом и вниманием</h3>
+        <p>site2u.by — веб-направление компании  IMC Computers. Создаём лендинги и сайты услуг для малого и среднего бизнеса с понятными условиями и зрелым подходом к каждому проекту.</p>
+        <p>Наш фокус — сайты, которые находят клиентов через поисковики, а не просто красиво выглядят.</p>
+        <a href="/o-nas" class="about-teaser__link">Подробнее о нас →</a>
+      </div>
+
+      <div class="about-teaser__stats">
+        {stats.map((stat) => (
+            <div class="stat-block">
+              <span class="stat-block__number">{stat.number}</span>
+              <span class="stat-block__label">{stat.label}</span>
+            </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .about-teaser{
+    background: var(--color-bg-secondary);
+  }
+  .about-teaser__stats > .stat-block{
+    background: var(--color-bg-primary);
+  }
+  .about-teaser__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .about-teaser__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .about-teaser__text p {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin: var(--space-sm) 0 var(--space-md);
+  }
+
+  .about-teaser__link {
+    display: inline-block;
+    color: var(--color-accent-hover);
+    font-weight: var(--font-weight-semibold);
+    transition: var(--transition-color);
+  }
+
+  .about-teaser__link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .about-teaser__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+
+  </style>

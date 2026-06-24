@@ -1,0 +1,135 @@
+---
+const { transparent = false } = Astro.props;
+interface Props {
+  transparent?: boolean
+}
+
+const navItems = [
+  {label: "Главная", href: "/"},
+  {label: "Услуги", href: "/uslugi"},
+  {label: "О нас", href: "/o-nas"},
+  {label: "Контакты", href: "/kontakty"},
+]
+---
+
+<header class={`header ${transparent ? 'header--transparent' : ''}`}>
+  <nav class="hero__header">
+    <ul class="hero__nav hero__nav--left">
+      {navItems.slice(0, 2).map((el) => (
+          <li class="hero__nav-item">
+            <a
+                href={el.href}
+                class={`hero__nav-link ${el.href === Astro.url.pathname ? 'active' : ''}`}
+            >
+              {el.label}
+            </a>
+          </li>
+      ))}
+    </ul>
+
+    <a href="/" class="hero__logo">
+      SITE2U
+    </a>
+
+    <ul class="hero__nav hero__nav--right">
+      {navItems.slice(2).map((el) => (
+          <li class="hero__nav-item">
+            <a
+                href={el.href}
+                class={`hero__nav-link ${el.href === Astro.url.pathname ? 'active' : ''}`}
+            >
+              {el.label}
+            </a>
+          </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .header {
+    width: 100%;
+    padding: var(--space-sm) 0;
+    position: relative;
+    z-index: 10;
+  }
+  .header {
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .header--transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    border-bottom: none;
+  }
+
+  /* Прозрачный хедер (поверх hero-блока) */
+  .header--transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+  }
+
+  /* Стили для навигации внутри хедера */
+  .hero__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .hero__nav {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+  }
+
+  .hero__nav-link {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+    transition: var(--transition-color), var(--transition-opacity);
+    text-decoration: none;
+  }
+
+  .hero__nav-link:hover {
+    opacity: 0.7;
+    color: var(--color-hero-nav-hover);
+  }
+
+  /* Активная ссылка */
+  .hero__nav-link.active {
+    color: var(--color-accent);
+  }
+
+  /* Логотип */
+  .hero__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 5px;
+    color: var(--color-white);
+    text-decoration: none;
+  }
+
+  /* Если хедер НЕ прозрачный, меняем цвета */
+  .header:not(.header--transparent) .hero__nav-link {
+    color: var(--color-text-primary);
+  }
+
+  .header:not(.header--transparent) .hero__logo {
+    color: var(--color-text-primary);
+  }
+
+  .header:not(.header--transparent) .hero__nav-link:hover {
+    color: var(--color-accent);
+  }
+</style>

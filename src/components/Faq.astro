@@ -1,0 +1,102 @@
+---
+interface Props {
+  items: { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+<section class="faq">
+  <h2 class="block-heading">Частые вопросы</h2>
+
+  <div class="faq__card">
+    <p class="faq__question" data-faq-question>{items[0].question}</p>
+    <p class="faq__answer" data-faq-answer>{items[0].answer}</p>
+
+    <div class="faq__controls">
+      <button class="faq__btn" data-faq-prev aria-label="Предыдущий вопрос">←</button>
+      <span class="faq__counter" data-faq-counter>1 / {items.length}</span>
+      <button class="faq__btn" data-faq-next aria-label="Следующий вопрос">→</button>
+    </div>
+  </div>
+  </section>
+
+  <script define:vars={{ items }}>
+    let currentIndex = 0;
+
+    const questionEl = document.querySelector('[data-faq-question]');
+    const answerEl = document.querySelector('[data-faq-answer]');
+    const counterEl = document.querySelector('[data-faq-counter]');
+    const prevBtn = document.querySelector('[data-faq-prev]');
+    const nextBtn = document.querySelector('[data-faq-next]');
+
+    function render() {
+      questionEl.textContent = items[currentIndex].question;
+      answerEl.textContent = items[currentIndex].answer;
+      counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      render();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      render();
+    });
+  </script>
+<style>
+.faq {
+  max-width: var(--container-sm);
+  }
+.faq__card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+  }
+
+.faq__question {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-sm);
+  }
+
+.faq__answer {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-md);
+  }
+
+.faq__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  }
+
+.faq__btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-circle);
+  background: var(--color-accent);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-bg);
+  cursor: pointer;
+  border: none;
+  }
+
+.faq__btn:hover {
+  background: var(--color-accent-hover);
+  }
+
+.faq__counter {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  min-width: 40px;
+  }
+</style>

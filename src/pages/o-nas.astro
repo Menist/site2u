@@ -1,0 +1,182 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+
+const breadcrumbItems = [
+  {label: "Главная", href: "/"},
+  {label: "О нас", href: "/o-nas"},
+];
+
+const stats = [
+  { number: '2001', label: 'год основания IMC Computers' },
+  { number: '24+', label: 'года на рынке Беларуси' },
+  { number: '3', label: 'направления внутри компании' },
+  { number: 'B2B', label: 'фокус на бизнес-клиентов' },
+];
+---
+<Layout title="О компании site2u.by — веб-направление IMC Computers"
+        description="site2u.by — веб-направление IMC Computers, 2001 год основания, 24+ года на рынке Беларуси, B2B-фокус">
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <div class="about-page container">
+
+    <div class="about-page__heading">
+      <h1 class="page-heading">Делаем сайты для бизнеса — с теплом и вниманием</h1>
+      <span class="service-detail__rule"></span>
+    </div>
+
+    <div class="about-page__stats">
+      {stats.map((stat) => (
+          <div class="stat-block">
+            <span class="stat-block__number">{stat.number}</span>
+            <span class="stat-block__label">{stat.label}</span>
+          </div>
+      ))}
+    </div>
+
+    <div class="about-page__grid">
+      <div class="about-page__text">
+        <p class="about-page__lead">
+          site2u.by — веб-направление компании
+          <a href="https://www.imc.by" target="_blank" rel="noopener" class="about-page__link">IMC Computers</a>.
+          Мы создаём лендинги и сайты услуг для малого и среднего бизнеса:
+          клиник, студий, кафе, салонов, сервисных компаний и агентств.
+        </p>
+        <p class="about-page__copy">
+          Мы работаем как веб-направление IMC Computers: с понятными условиями, с вниманием и зрелым подходом к каждому проекту — без потока однотипных шаблонов.
+        </p>
+        <p class="about-page__copy">
+          Наш фокус — не декоративный дизайн сам по себе, а сайт, который помогает бизнесу выглядеть понятно и профессионально, объясняет суть услуги и работает на поток обращений из поиска и рекламы.
+        </p>
+      </div>
+
+      <aside class="about-page__principles" aria-label="Как строим работу">
+        <h2 class="block-heading">Как строим работу</h2>
+        <ul class="about-page__list">
+          <li class="about-page__item">Согласуем задачи, объём и этапы работы без размытых обещаний.</li>
+          <li class="about-page__item">После каждого этапа показываем результат и согласуем правки.</li>
+          <li class="about-page__item">При необходимости подключаем дизайнера.</li>
+          <li class="about-page__item">После запуска остаёмся на связи как подрядчик и консультируем по сайту.</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="about-page__cta">
+      <a href="/kontakty" class="about-page__btn">Связаться с нами</a>
+      <a href="/uslugi" class="about-page__secondary">Смотреть услуги →</a>
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+  .about-page {
+    padding: var(--space-3xl) 0;
+  }
+
+  .about-page__heading {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .about-page__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    .about-page__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .about-page__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+    align-items: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    .about-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .about-page__lead {
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+  }
+
+  .about-page__copy {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+  }
+
+  .about-page__principles {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+  }
+
+  .about-page__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .about-page__item {
+    padding-left: var(--space-md);
+    position: relative;
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .about-page__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-circle);
+    background: var(--color-accent);
+  }
+
+  .about-page__cta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .about-page__btn {
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-full);
+    transition: background var(--transition-base), transform var(--transition-base);
+  }
+
+  .about-page__btn:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .about-page__secondary {
+    color: var(--color-accent-hover);
+    font-weight: var(--font-weight-semibold);
+    transition: var(--transition-color);
+  }
+
+  .about-page__secondary:hover {
+    color: var(--color-text-primary);
+  }
+</style>

@@ -1,23 +1,80 @@
+---
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import '../styles/global.css'
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "site2u.by",
+  "url": "https://site2u.by",
+  "telephone": "+375296195265",
+  "email": "hello@site2u.by",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "пр. Независимости, д. 68-2, к.108",
+    "addressLocality": "Минск",
+    "addressCountry": "BY"
+  }
+};
+
+interface Props {
+  title: string;
+  description: string;
+  serviceSchema?: object;
+  transparent?: boolean
+}
+
+const {title, description, serviceSchema, transparent = false} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL('/og-image.jpg', Astro.site);
+---
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="icon" href="/favicon.ico"/>
+  <meta name="generator" content={Astro.generator}/>
+  <title>{title}</title>
+  <meta name="description" content={description}/>
+  <link rel="canonical" href={canonicalURL}/>
+  <meta property="og:title" content={title}/>
+  <meta property="og:description" content={description}/>
+  <meta property="og:url" content={canonicalURL}/>
+  <meta property="og:image" content={ogImageURL}/>
+  <meta property="og:type" content="website"/>
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}/>
+  {serviceSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  )}
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link rel="stylesheet" href="/animations.css" />
+  <script defer src="/animations.js"></script>
+</head>
+<body>
+<Header transparent={transparent}/>
+<main>
+  <slot/>
+</main>
+<Footer/>
+
+
+</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+  }
 </style>

@@ -1,0 +1,207 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const breadcrumbItems = [
+  { label: "Главная", href: "/" },
+  { label: "Услуги", href: "/uslugi" },
+];
+
+const advantages = [
+  { text: 'Оплата по факту готовой работы — без предоплаты' },
+  { text: 'Работаем с вашим макетом или подключаем дизайнера' },
+  { text: 'Подходящий объём работ — платите только за то, что нужно' },
+  { text: 'Остаёмся на связи после запуска и консультируем' },
+];
+---
+
+<Layout title="Разработка сайтов в Беларуси | site2u.by"
+        description="Создаём лендинги и корпоративные сайты для бизнеса в Беларуси. Постоплата, адаптив, SEO-готовность по запросу.">
+  <Breadcrumbs items={breadcrumbItems} />
+
+  <div class="uslugi-page container">
+
+    <div class="uslugi-page__heading">
+      <h1 class="page-heading">Разработка сайтов для бизнеса в Беларуси</h1>
+      <span class="service-detail__rule"></span>
+      <p class="uslugi-page__lead">Делаем лендинги и корпоративные сайты — с вниманием к деталям, адаптивом под все устройства и SEO-готовностью по запросу.</p>
+    </div>
+
+    <div class="uslugi-page__services">
+      <a href="/uslugi/landing" class="uslugi-teaser">
+        <div class="uslugi-teaser__body">
+          <h2 class="uslugi-teaser__title">Лендинг</h2>
+          <p class="uslugi-teaser__desc">Одностраничный сайт под рекламную кампанию, акцию или мероприятие. Подходит для кафе, салонов, промо-страниц.</p>
+          <span class="uslugi-teaser__term">5–10 дней</span>
+        </div>
+        <span class="uslugi-teaser__arrow">→</span>
+      </a>
+
+      <a href="/uslugi/corporate-site" class="uslugi-teaser uslugi-teaser--primary">
+        <div class="uslugi-teaser__body">
+          <h2 class="uslugi-teaser__title">Корпоративный сайт</h2>
+          <p class="uslugi-teaser__desc">Многостраничный сайт для постоянного присутствия в сети. Подходит для клиник, студий, агентств.</p>
+          <span class="uslugi-teaser__term">3–4 недели</span>
+        </div>
+        <span class="uslugi-teaser__arrow">→</span>
+      </a>
+    </div>
+
+    <div class="uslugi-page__advantages">
+      <h2 class="block-heading">Почему выбирают нас</h2>
+      <ul class="uslugi-advantages">
+        {advantages.map((item) => (
+            <li class="uslugi-advantages__item">
+              <svg class="uslugi-advantages__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>{item.text}</span>
+            </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="uslugi-page__cta">
+      <a href="/kontakty" class="uslugi-page__btn">Обсудить проект</a>
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+  .uslugi-page {
+    padding: var(--space-3xl) 0;
+  }
+
+  .uslugi-page__heading {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .uslugi-page__lead {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-md);
+    max-width: var(--container-sm);
+    margin-top: var(--space-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Тизеры услуг */
+  .uslugi-page__services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    .uslugi-page__services {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .uslugi-teaser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .uslugi-teaser--primary {
+    border-color: var(--color-accent);
+  }
+
+  .uslugi-teaser:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .uslugi-teaser__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-xs);
+  }
+
+  .uslugi-teaser__desc {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-sm);
+  }
+
+  .uslugi-teaser__term {
+    display: inline-block;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent-hover);
+    background: rgba(255, 190, 73, 0.1);
+    padding: 4px var(--space-sm);
+    border-radius: var(--radius-full);
+  }
+
+  .uslugi-teaser__arrow {
+    font-size: var(--font-size-xl);
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+  }
+
+  .uslugi-teaser:hover .uslugi-teaser__arrow {
+    transform: translateX(4px);
+  }
+
+  /* Преимущества */
+  .uslugi-page__advantages {
+    margin-bottom: var(--space-2xl);
+    max-width: var(--container-sm);
+  }
+
+  .uslugi-advantages {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .uslugi-advantages__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .uslugi-advantages__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--color-accent-hover);
+    margin-top: 2px;
+  }
+
+  /* CTA */
+  .uslugi-page__cta {
+    display: flex;
+  }
+
+  .uslugi-page__btn {
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-full);
+    transition: background var(--transition-base), transform var(--transition-base);
+  }
+
+  .uslugi-page__btn:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+</style>

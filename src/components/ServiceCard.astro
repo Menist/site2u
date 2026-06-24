@@ -1,0 +1,152 @@
+---
+interface Props {
+  title: string;
+  forText: string;
+  items: string[];
+  term: string;
+  btnText: string;
+  btnHref: string;
+  primary?: boolean;
+}
+
+const { title, forText, items, term, btnText, btnHref, primary = false } = Astro.props;
+---
+<article class={primary ? 'service-card service-card--primary' : 'service-card'}>
+  <div class="service-card__icon">
+    <slot name="icon" />
+  </div>
+
+  <div class="service-card__body">
+    <h3 class="service-card__title">{title}</h3>
+    <p class="service-card__for"><span class="service-card__label">Подходит для:</span> {forText}</p>
+  </div>
+
+  <ul class="service-card__list">
+    {items.map((item) => (
+        <li>{item}</li>
+    ))}
+  </ul>
+
+  <div class="service-card__footer">
+    <p class="service-card__term">{term}</p>
+    <a href={btnHref} class="service-card__btn">{btnText}</a>
+  </div>
+
+  <p class="service-card__design-note">
+    Работаем с вашим макетом или разработаем дизайн с нуля
+  </p>
+</article>
+
+<style>
+  .service-card {
+    width: 50%;
+    text-align: center;
+    padding: 40px 30px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg-primary);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.4s ease, transform var(--transition-base);
+  }
+  .service-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.14) 0 24px 64px;
+    transform: translateY(-4px);
+  }
+  .service-card--primary {
+    border: 1px solid var(--color-accent);
+  }
+
+  .service-card__title {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-normal);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+    color: var(--color-text-primary);
+  }
+
+  .service-card__label {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .service-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .service-card__list li::before {
+    content: "✓";
+    position: static;
+    margin-right: 6px;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+  .service-card__for{
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-secondary);
+    margin-top: calc(var(--space-sm) * -0.5);
+    margin-bottom: var(--space-lg);
+  }
+
+  .service-card__list li {
+    padding-left: var(--space-sm);
+    position: relative;
+    color: var(--color-text-secondary);
+  }
+
+  .service-card__term {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid var(--color-divider);
+  }
+
+  .service-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-lg);
+    padding: 13px 30px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    background-color: transparent;
+    transition: var(--transition-bg), var(--transition-color), var(--transition-transform);
+  }
+
+  .service-card__btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+
+  .service-card__design-note {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+    text-align: center;
+  }
+  .service-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .service-card__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: auto;
+    width: 100%;
+  }
+</style>
