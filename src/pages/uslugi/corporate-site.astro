@@ -37,7 +37,8 @@ const breadcrumbItems = [
         serviceSchema={serviceSchema}>
   <Breadcrumbs items={breadcrumbItems}/>
 
-  <div class="service-detail container">
+  <div class="service-detail page--padded">
+    <div class="container">
     <div class="service-detail__heading-block">
       <h1 class="page-heading">Корпоративный сайт для постоянного присутствия в сети</h1>
       <span class="service-detail__rule"></span>
@@ -51,49 +52,49 @@ const breadcrumbItems = [
     <section class="service-features">
       <h2 class="block-heading">Что вы получаете</h2>
       <div class="service-features__grid">
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
           <p>Структура из нескольких ключевых страниц: о компании, услуги, контакты</p>
         </div>
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
           <p>Единый стиль и удобная навигация между разделами</p>
         </div>
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
           <p>Адаптивная вёрстка — одинаково хорошо работает на всех устройствах</p>
         </div>
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
           <p>Быстрая загрузка страниц для комфортного просмотра</p>
         </div>
-        <div class="feature-item feature-item--optional">
+        <div class="feature-item card block--accent-border">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
           <p>CMS для самостоятельного редактирования контента</p>
         </div>
-        <div class="feature-item feature-item--optional">
+        <div class="feature-item card block--accent-border">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
           <p>Google Analytics + Яндекс.Метрика для анализа трафика</p>
         </div>
-        <div class="feature-item feature-item--optional">
+        <div class="feature-item card block--accent-border">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
@@ -107,11 +108,11 @@ const breadcrumbItems = [
     <section class="service-design">
       <h2 class="block-heading">Работа с дизайном</h2>
       <div class="service-design__grid">
-        <div class="design-option">
+        <div class="design-option card">
           <h3>Если у вас уже есть макет</h3>
           <p>Соберём сайт точно по макету — без лишних созвонов и согласований.</p>
         </div>
-        <div class="design-option">
+        <div class="design-option card">
           <h3>Если макета нет</h3>
           <p>Подключим дизайнера, согласуем дизайн до начала разработки.</p>
         </div>
@@ -125,11 +126,11 @@ const breadcrumbItems = [
     </section>
 
     <section class="service-stats">
-      <div class="stat-block">
+      <div class="stat-block card">
         <span class="stat-block__number">3–4</span>
         <span class="stat-block__label">недели на разработку</span>
       </div>
-      <div class="stat-block">
+      <div class="stat-block card">
         <span class="stat-block__number">100%</span>
         <span class="stat-block__label">оплата по факту готовой работы</span>
       </div>
@@ -142,13 +143,10 @@ const breadcrumbItems = [
     </section>
     <Faq items={faqItems}/>
   </div>
+  </div>
 </Layout>
 
 <style>
-  .service-detail {
-    padding: var(--space-3xl) 0;
-  }
-
   .service-detail__lead {
     font-size: var(--font-size-md);
     color: var(--color-text-secondary);
@@ -185,18 +183,6 @@ const breadcrumbItems = [
     font-style: italic;
   }
 
-  .feature-item,
-  .design-option {
-    transition: var(--transition-transform), box-shadow var(--transition-base);
-  }
-
-  .feature-item:hover,
-  .design-option:hover,
-  .stat-block:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-card);
-  }
-
   @media (max-width: 768px) {
     .service-features__grid {
       grid-template-columns: 1fr;
@@ -207,15 +193,7 @@ const breadcrumbItems = [
     display: flex;
     align-items: flex-start;
     gap: var(--space-sm);
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-sm);
     padding: var(--space-md);
-  }
-
-  .feature-item--optional {
-    background: var(--color-bg-secondary);
-    border: 2px dashed var(--color-accent);
-    border-radius: var(--radius-sm);
   }
 
   .feature-item__icon {
@@ -257,7 +235,6 @@ const breadcrumbItems = [
   }
 
   .design-option {
-    border: 1px solid var(--color-divider);
     border-radius: var(--radius-sm);
     padding: var(--space-md);
   }

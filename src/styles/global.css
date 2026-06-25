@@ -15,7 +15,7 @@
   --color-overlay-map: rgba(0, 0, 0, 0.5);
   --color-divider: #d9d9d9;
 
-  --color-hero-nav-hover: #ffbe49; /* совпадает с accent — оставлено явно для читаемости */
+  --color-hero-nav-hover: #ffbe49;
 
   /* ── Типографика ── */
   --font-family-base: 'Open Sans', Arial, sans-serif;
@@ -136,7 +136,7 @@ img {
   color: var(--color-text-primary);
   text-align: center;
   max-width: var(--container-sm);
-  margin: 0 auto var(--space-2xl);
+  margin: 0 auto var(--space-md);
 }
 .section-heading__subtitle {
   text-align: center;
@@ -145,7 +145,7 @@ img {
   line-height: var(--line-height-relaxed);
   color: var(--color-text-primary);
   max-width: 560px;
-  margin: 0 auto var(--space-2xl);
+  margin: 0 auto var(--space-lg);
 }
 .block-heading {
   font-size: var(--font-size-lg);
@@ -155,7 +155,7 @@ img {
 .page-heading {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  margin: var(--space-lg) 0 var(--space-md);
+  margin: 0 0 var(--space-md);
 }
 /* ============================================
    Статистические блоки (stat-block)
@@ -167,11 +167,12 @@ img {
 .stat-block {
   flex: 1;
   min-width: 160px;
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-sm);
+  /*background: var(--color-bg-primary);*/
+  /*border-radius: var(--radius-sm);*/
   padding: var(--space-md) var(--space-lg);
   text-align: center;
-  transition: box-shadow 0.4s ease, transform var(--transition-base);
+  /*transition: box-shadow 0.4s ease, transform var(--transition-base);*/
+  /*box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);*/
 }
 .stat-block:hover{
   box-shadow: rgba(0, 0, 0, 0.14) 0 24px 64px;
@@ -189,9 +190,7 @@ img {
   font-size: var(--font-size-base);
   color: var(--color-text-secondary);
 }
-.stat-block {
-  transition: var(--transition-transform), box-shadow var(--transition-base);
-}
+
 /* ==========================================================================
    УТИЛИТЫ
    ========================================================================== */
@@ -209,7 +208,6 @@ img {
   max-width: var(--container-lg);
   margin: 0 auto;
   padding: 0 20px;
-  /* Предотвращает схлопывание контента на экранах <360px */
   min-width: 0;
 }
 
@@ -219,9 +217,42 @@ img {
   он не конфликтует с индивидуальными padding в секциях.
 */
 .section--padded {
-  padding: var(--space-4xl) 0;
+  padding: var(--space-3xl) 0;
+}
+.page--padded{
+  padding: var(--space-xl) 0 var(--space-4xl);
+}
+/* Карточка на белом фоне */
+.card {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+  transition: var(--transition-transform), box-shadow var(--transition-base);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
 }
 
+/* Карточка на сером фоне — тень тише */
+.card--subtle {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+.card--subtle:hover {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.14);
+}
+
+/* Акцентная карточка */
+.card--accent {
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Блок с левым акцентом */
+.block--accent-border {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-lg);
+}
 @media (max-width: 992px) {
   .section--padded {
     padding: var(--space-2xl) 0;

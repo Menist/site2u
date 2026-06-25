@@ -31,7 +31,8 @@ const faqItems = [
         description="Адаптивный лендинг с формой заявки и оптимизацией" serviceSchema={serviceSchema}>
   <Breadcrumbs items={breadcrumbItems} />
 
-  <div class="service-detail container">
+  <div class="service-detail page--padded">
+    <div class="container">
     <div class="service-detail__heading-block">
       <h1 class="page-heading">Лендинг под рекламную кампанию или акцию</h1>
       <span class="service-detail__rule"></span>
@@ -45,25 +46,25 @@ const faqItems = [
     <section class="service-features">
       <h2 class="block-heading">Что вы получаете</h2>
       <div class="service-features__grid">
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <p>Сайт одинаково удобно открывается с телефона и компьютера</p>
         </div>
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <p>Быстрая загрузка страницы — реклама не сливает бюджет на людей, которые не дождались сайта</p>
         </div>
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <p>Понятная форма заявки или кнопка в мессенджер</p>
         </div>
-        <div class="feature-item">
+        <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -75,11 +76,11 @@ const faqItems = [
     <section class="service-design">
       <h2 class="block-heading">Работа с дизайном</h2>
       <div class="service-design__grid">
-        <div class="design-option">
+        <div class="design-option card">
           <h3>Если у вас уже есть макет</h3>
           <p>Соберём сайт точно по макету — без лишних созвонов и согласований.</p>
         </div>
-        <div class="design-option">
+        <div class="design-option card">
           <h3>Если макета нет</h3>
           <p>Подключим дизайнера, согласуем дизайн до начала разработки.</p>
         </div>
@@ -92,11 +93,11 @@ const faqItems = [
     </section>
 
     <section class="service-stats">
-      <div class="stat-block">
+      <div class="stat-block card">
         <span class="stat-block__number">5–10</span>
         <span class="stat-block__label">дней на разработку</span>
       </div>
-      <div class="stat-block">
+      <div class="stat-block card ">
         <span class="stat-block__number">100%</span>
         <span class="stat-block__label">оплата по факту готовой работы</span>
       </div>
@@ -107,13 +108,11 @@ const faqItems = [
       <p>Остаёмся на связи и консультируем по сайту.</p>
     </section>
     <Faq items={faqItems} />
+    </div>
   </div>
 </Layout>
 
 <style>
-  .service-detail {
-    padding: var(--space-3xl) 0;
-  }
 
   .service-detail__lead {
     font-size: var(--font-size-md);
@@ -148,18 +147,6 @@ const faqItems = [
     gap: var(--space-md);
   }
 
-  .feature-item,
-  .design-option{
-    transition: var(--transition-transform), box-shadow var(--transition-base);
-  }
-
-  .feature-item:hover,
-  .design-option:hover,
-  .stat-block:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-card);
-  }
-
   @media (max-width: 768px) {
     .service-features__grid {
       grid-template-columns: 1fr;
@@ -170,7 +157,6 @@ const faqItems = [
     display: flex;
     align-items: flex-start;
     gap: var(--space-sm);
-    background: var(--color-bg-secondary);
     border-radius: var(--radius-sm);
     padding: var(--space-md);
   }
@@ -213,7 +199,6 @@ const faqItems = [
   }
 
   .design-option {
-    border: 1px solid var(--color-divider);
     border-radius: var(--radius-sm);
     padding: var(--space-md);
   }

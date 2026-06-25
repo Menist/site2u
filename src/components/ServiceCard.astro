@@ -29,7 +29,7 @@ const { title, forText, items, term, btnText, btnHref, primary = false } = Astro
 
   <div class="service-card__footer">
     <p class="service-card__term">{term}</p>
-    <a href={btnHref} class="service-card__btn">{btnText}</a>
+    <a href={btnHref} class="service-card__btn" data-track={`service_${btnHref.split('/').pop()}`}>{btnText}</a>
   </div>
 
   <p class="service-card__design-note">

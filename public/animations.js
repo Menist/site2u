@@ -214,6 +214,7 @@
   ═══════════════════════════════════════════════════════════════════════════ */
 
   function init() {
+    document.documentElement.classList.remove('js-loading');
     document.body.classList.add("js-ready");
 
     initHeroEntrance();

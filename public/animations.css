@@ -1,4 +1,19 @@
+/* Скрываем Hero-элементы ДО загрузки JS */
+.js-loading .hero__subtitle,
+.js-loading .hero__cta,
+.js-loading .hero__arrow {
+  opacity: 0;
+}
 
+.js-loading .services,
+.js-loading .about-teaser,
+.js-loading .advantages,
+.js-loading .process,
+.js-loading .configurator,
+.js-loading .cta {
+  opacity: 0;
+  transform: translateY(35px);
+}
 
 html {
   scroll-behavior: smooth;

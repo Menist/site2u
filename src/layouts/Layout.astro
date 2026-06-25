@@ -1,4 +1,8 @@
 ---
+import '@fontsource/open-sans/300.css';
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
@@ -28,10 +32,28 @@ const {title, description, serviceSchema, transparent = false} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL('/og-image.jpg', Astro.site);
 ---
-<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8"/>
+  <style is:global>
+    .js-loading .hero__subtitle,
+    .js-loading .hero__cta,
+    .js-loading .hero__arrow {
+      opacity: 0 !important;
+    }
+    .js-loading .services,
+    .js-loading .about-teaser,
+    .js-loading .advantages,
+    .js-loading .process,
+    .js-loading .configurator,
+    .js-loading .cta {
+      opacity: 0 !important;
+      transform: translateY(35px) !important;
+    }
+  </style>
+  <script is:inline>
+    document.documentElement.classList.add('js-loading');
+  </script>
   <meta name="viewport" content="width=device-width"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="icon" href="/favicon.ico"/>
@@ -49,8 +71,73 @@ const ogImageURL = new URL('/og-image.jpg', Astro.site);
     <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   )}
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <link rel="stylesheet" href="/animations.css" />
+  <link rel="stylesheet" href="/animations.css"/>
   <script defer src="/animations.js"></script>
+  <script is:inline>
+    function loadAnalytics() {
+      // Google Analytics
+      const gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-9EL42XVXEB';
+      document.head.appendChild(gaScript);
+      gaScript.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-9EL42XVXEB');
+      };
+
+      // Яндекс.Метрика
+      (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+          (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=110113534', 'ym');
+      ym(110113534, 'init', {
+        ssr: true,
+        webvisor: true,
+        clickmap: true,
+        accurateTrackBounce: true,
+        trackLinks: true
+      });
+    }
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadAnalytics);
+    } else {
+      setTimeout(loadAnalytics, 2000);
+    }
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/110113534" style="position:absolute;left:-9999px;" alt=""/></div>
+  </noscript>
+
+  <script is:inline>
+    document.addEventListener('click', function (e) {
+      const target = e.target.closest('[data-track]');
+      if (!target) return;
+
+      const eventName = target.dataset.track;
+
+      if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, {
+          event_category: 'click',
+          event_label: target.textContent.trim()
+        });
+      }
+
+      if (typeof ym !== 'undefined') {
+        ym(110113534, 'reachGoal', eventName);
+      }
+    });
+  </script>
 </head>
 <body>
 <Header transparent={transparent}/>

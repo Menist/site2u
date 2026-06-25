@@ -16,9 +16,8 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
         description="Свяжитесь с нами: телефон, email, адрес офиса в Минске. Работаем удалённо по всей Беларуси.">
   <Breadcrumbs items={breadcrumbItems} />
 
-  <section class="contacts section--padded">
+  <section class="contacts page--padded">
     <div class="container">
-
       <div class="contacts__grid">
         <div class="contacts__left">
 
@@ -27,20 +26,20 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
             <span class="service-detail__rule"></span>
 
             <div class="contacts__group">
-              <a href="tel:+375296195265" class="contacts__link">+375 (29) 619-52-65</a>
-              <a href="mailto:hello@site2u.by" class="contacts__link">hello@site2u.by</a>
+              <a href="tel:+375296195265" class="contacts__link" data-track="click_phone_contacts">+375 (29) 619-52-65</a>
+              <a href="mailto:hello@site2u.by" class="contacts__link" data-track="click_email_contacts">hello@site2u.by</a>
             </div>
 
             <p class="contacts__address">Офис в Минске, работаем удалённо по всей Беларуси</p>
 
             <div class="contacts__socials">
-              <a href="#" class="contacts__social">
+              <a href="https://t.me/твой_ник" class="contacts__social" data-track="click_telegram">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M21.6 3.8L18.2 20.1C17.9 21.3 17.2 21.6 16.2 21L11.7 17.7L9.5 19.8C9.2 20.1 9 20.4 8.4 20.4L8.7 15.7L17.4 7.8C17.8 7.4 17.5 7.2 17 7.6L6.3 14.3L1.7 12.8C0.7 12.5 0.7 11.8 1.9 11.3L20.1 4.3C21 4 21.8 4.5 21.6 3.8Z" fill="currentColor"/>
                 </svg>
                 <span>Telegram</span>
               </a>
-              <a href="#" class="contacts__social">
+              <a href="viber://chat?number=+375296195265" class="contacts__social" data-track="click_viber">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M18.9 2.8C16.5 1.2 7.5 1.2 5.1 2.8C2.4 4.7 2.2 8.4 2.5 11.2C2.8 14 4.5 16 6.7 17.3L6.2 21L10 18.8C12.5 19.2 17.8 19 19.2 16.8C20.8 14.2 21.5 4.5 18.9 2.8Z" fill="currentColor"/>
                   <path d="M8 8C9.5 11 11.5 13 15 14" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
@@ -50,7 +49,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
             </div>
           </div>
 
-          <div class="contacts__form-card">
+          <div class="contacts__form-card card">
             <h2 class="contacts__form-title">Оставить заявку</h2>
 
             <form class="contacts__form" id="contactForm" novalidate>
@@ -122,7 +121,6 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
     align-items: start;
-    margin: var(--space-lg) 0 var(--space-md);
   }
   .contacts-heading {
     font-size: var(--font-size-2xl);
@@ -197,8 +195,6 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
 
   /* Форма */
   .contacts__form-card {
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
     padding: var(--space-lg);
   }
 
@@ -267,7 +263,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
     top: -10px;
     transform: none;
     padding: 0 6px;
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-primary);
     color: var(--color-accent-hover);
     font-size: var(--font-size-xs);
   }
@@ -425,6 +421,9 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
       showStatus('');
       try {
         await emailjs.sendForm(serviceId, templateId, form);
+        if (typeof gtag !== 'undefined') gtag('event', 'contact_form_submit', { event_category: 'form' });
+        if (typeof ym !== 'undefined') ym(110113534, 'reachGoal', 'contact_form_submit');
+
         showStatus('Заявка отправлена! Свяжемся с вами в ближайшее время.', 'success');
         form.reset();
       } catch (err) {

@@ -39,7 +39,7 @@ const features = [
 
     <div class="advantages__grid">
       {features.map((feature) => (
-          <div class="advantages__card">
+          <div class="advantages__card card">
             <h3 class="advantages__title">{feature.title}</h3>
             <p class="advantages__description">{feature.description}</p>
             <ul class="advantages__list">
@@ -67,18 +67,10 @@ const features = [
   }
 
   .advantages__card {
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-sm);
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    transition: var(--transition-transform), box-shadow var(--transition-base);
-  }
-
-  .advantages__card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-card);
   }
 
   .advantages__title {
@@ -88,7 +80,6 @@ const features = [
 
   .advantages__description {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
     line-height: var(--line-height-relaxed);
   }
 
@@ -100,7 +91,6 @@ const features = [
   }
 
   .advantages__list li {
-    font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
     padding-left: var(--space-sm);
     position: relative;

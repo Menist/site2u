@@ -8,7 +8,7 @@ const { items } = Astro.props;
 <section class="faq">
   <h2 class="block-heading">Частые вопросы</h2>
 
-  <div class="faq__card">
+  <div class="faq__card card">
     <p class="faq__question" data-faq-question>{items[0].question}</p>
     <p class="faq__answer" data-faq-answer>{items[0].answer}</p>
 
@@ -50,8 +50,6 @@ const { items } = Astro.props;
   max-width: var(--container-sm);
   }
 .faq__card {
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-lg);
   padding: var(--space-lg);
   text-align: center;
   }

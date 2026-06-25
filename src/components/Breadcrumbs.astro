@@ -18,8 +18,9 @@ const breadcrumbSchema={
 }
 ---
 <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}/>
+
 <div class="container">
-<nav class="breadcrumbs container">
+<nav class="breadcrumbs ">
   {items.map((el, index) => (
     index === items.length - 1
       ? <span>{el.label}</span>
@@ -36,6 +37,7 @@ const breadcrumbSchema={
     font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
     margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
   }
 
   .breadcrumbs a {

@@ -18,8 +18,8 @@ const stats = [
         description="site2u.by — веб-направление IMC Computers, 2001 год основания, 24+ года на рынке Беларуси, B2B-фокус">
   <Breadcrumbs items={breadcrumbItems} />
 
-  <div class="about-page container">
-
+  <div class="about-page page--padded">
+    <div class="container">
     <div class="about-page__heading">
       <h1 class="page-heading">Делаем сайты для бизнеса — с теплом и вниманием</h1>
       <span class="service-detail__rule"></span>
@@ -27,7 +27,7 @@ const stats = [
 
     <div class="about-page__stats">
       {stats.map((stat) => (
-          <div class="stat-block">
+          <div class="stat-block card">
             <span class="stat-block__number">{stat.number}</span>
             <span class="stat-block__label">{stat.label}</span>
           </div>
@@ -50,7 +50,7 @@ const stats = [
         </p>
       </div>
 
-      <aside class="about-page__principles" aria-label="Как строим работу">
+      <aside class="about-page__principles card" aria-label="Как строим работу">
         <h2 class="block-heading">Как строим работу</h2>
         <ul class="about-page__list">
           <li class="about-page__item">Согласуем задачи, объём и этапы работы без размытых обещаний.</li>
@@ -67,12 +67,10 @@ const stats = [
     </div>
 
   </div>
+  </div>
 </Layout>
 
 <style>
-  .about-page {
-    padding: var(--space-3xl) 0;
-  }
 
   .about-page__heading {
     margin-bottom: var(--space-2xl);
@@ -118,8 +116,6 @@ const stats = [
   }
 
   .about-page__principles {
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius-lg);
     padding: var(--space-lg);
   }
 
