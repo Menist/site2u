@@ -22,7 +22,7 @@ const faqItems = [
   },
   {
     question: 'Обязательно ли подключать CMS?',
-    answer: 'Нет, это опция — подключаем, если хотите менять тексты и фото самостоятельно.'
+    answer: 'Нет. Подключаем CMS, если вы хотите самостоятельно менять тексты и фотографии после запуска сайта.'
   }
 ];
 
@@ -40,13 +40,12 @@ const breadcrumbItems = [
   <div class="service-detail page--padded">
     <div class="container">
     <div class="service-detail__heading-block">
-      <h1 class="page-heading">Корпоративный сайт для постоянного присутствия в сети</h1>
+      <h1 class="page-heading">Корпоративный сайт для компании</h1>
       <span class="service-detail__rule"></span>
     </div>
 
     <p class="service-detail__lead">
-      Клиники, студии, агентства — бизнесы, которым нужно не разовое промо, а постоянное представительство в сети. Сайт,
-      который работает на репутацию и доверие 24/7.
+      Подходит для клиник, студий, агентств и других компаний, которым важно подробно рассказать о себе, услугах и способах связи с клиентами.
     </p>
 
     <section class="service-features">
@@ -71,7 +70,7 @@ const breadcrumbItems = [
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
-          <p>Адаптивная вёрстка — одинаково хорошо работает на всех устройствах</p>
+          <p>Сайт корректно отображается на компьютерах, планшетах и смартфонах</p>
         </div>
         <div class="feature-item card">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,24 +84,25 @@ const breadcrumbItems = [
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
-          <p>CMS для самостоятельного редактирования контента</p>
+          <p>Самостоятельное редактирование текстов и фотографий (CMS)</p>
         </div>
         <div class="feature-item card block--accent-border">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
-          <p>Google Analytics + Яндекс.Метрика для анализа трафика</p>
+          <p>Подключение Google Analytics и Яндекс.Метрики</p>
         </div>
         <div class="feature-item card block--accent-border">
           <svg class="feature-item__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                   stroke-linejoin="round"/>
           </svg>
-          <p>Отслеживание действий пользователей для оптимизации</p>
+          <p>Отслеживание заявок и других действий посетителей</p>
         </div>
       </div>
       <p class="service-features__hint">Базовое + Опционально (по согласованию)</p>
+      <p class="service-features__text block--accent-border">Для большинства корпоративных сайтов мы рекомендуем техническую подготовку к продвижению, так как такие сайты обычно рассчитаны на долгосрочную работу и привлечение посетителей из поисковых систем.</p>
     </section>
 
     <section class="service-design">
@@ -110,19 +110,18 @@ const breadcrumbItems = [
       <div class="service-design__grid">
         <div class="design-option card">
           <h3>Если у вас уже есть макет</h3>
-          <p>Соберём сайт точно по макету — без лишних созвонов и согласований.</p>
+          <p>Соберём сайт по готовому макету и согласуем только важные детали</p>
         </div>
         <div class="design-option card">
           <h3>Если макета нет</h3>
-          <p>Подключим дизайнера, согласуем дизайн до начала разработки.</p>
+          <p>Поможем разработать дизайн и согласуем его до начала разработки сайта</p>
         </div>
       </div>
     </section>
 
     <section class="service-detail__block">
       <h2 class="block-heading">SEO — по согласованию</h2>
-      <p>Для корпоративного сайта, который должен находиться в поиске самостоятельно, рекомендуем SEO-оптимизацию.
-        Настроим мета-теги, структуру и контент для лучшего ранжирования.</p>
+      <p>Если важно, чтобы сайт находили через Google и Яндекс, можно подключить техническую подготовку к продвижению. Настроим структуру, мета-теги и другие базовые элементы сайта.</p>
     </section>
 
     <section class="service-stats">
@@ -138,8 +137,7 @@ const breadcrumbItems = [
 
     <section class="service-detail__block">
       <h2 class="block-heading">После запуска</h2>
-      <p>Консультируем по работе с сайтом, помогаем разобраться с CMS и системой аналитики — остаёмся на связи и после
-        сдачи проекта.</p>
+      <p>После запуска поможем разобраться с CMS и аналитикой, ответим на вопросы и останемся на связи.</p>
     </section>
     <Faq items={faqItems}/>
   </div>
@@ -154,7 +152,12 @@ const breadcrumbItems = [
     margin-bottom: var(--space-lg);
   }
 
-
+  .service-features__text{
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  max-width: var(--container-sm);
+  margin: var(--space-lg) 0;
+}
   .service-detail__block {
     max-width: var(--container-sm);
     margin-bottom: var(--space-xl);

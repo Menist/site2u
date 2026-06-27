@@ -1,8 +1,88 @@
 ---
 import Layout from '../layouts/Layout.astro'
 ---
-<Layout title="Такой страницы не существует 404"
-        description="Данная страница не найдена 404">
-  <h1 class="section-heading">Страница не найдена 404</h1>
-  <p>Такой страницы не существует. Перейдите, пожалуйста,<a href="/">на главную страницу</a></p>
+<Layout title="Страница не найдена | site2u.by"
+        description="Запрашиваемая страница не существует. Вернитесь на главную страницу site2u.by">
+
+  <div class="not-found container">
+    <div class="not-found__inner">
+      <span class="not-found__code">404</span>
+      <h1 class="not-found__title">Страница не найдена</h1>
+      <p class="not-found__desc">Возможно, страница была удалена или вы перешли по неверной ссылке.</p>
+      <div class="not-found__actions">
+        <a href="/" class="not-found__btn">На главную</a>
+        <a href="/kontakty" class="not-found__link">Связаться с нами →</a>
+      </div>
+    </div>
+  </div>
+
 </Layout>
+
+<style>
+  .not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: var(--space-3xl) 0;
+  }
+
+  .not-found__inner {
+    text-align: center;
+    max-width: 480px;
+  }
+
+  .not-found__code {
+    display: block;
+    font-size: clamp(80px, 15vw, 160px);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .not-found__title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-md);
+  }
+
+  .not-found__desc {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-xl);
+  }
+
+  .not-found__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .not-found__btn {
+    display: inline-block;
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-full);
+    transition: background var(--transition-base), transform var(--transition-base);
+  }
+
+  .not-found__btn:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .not-found__link {
+    color: var(--color-accent-hover);
+    font-weight: var(--font-weight-semibold);
+    transition: var(--transition-color);
+  }
+
+  .not-found__link:hover {
+    color: var(--color-text-primary);
+  }
+</style>

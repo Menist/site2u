@@ -3,17 +3,17 @@ const process = [
   {
     number: '01',
     title: 'Обсуждение',
-    items: ['Обсуждаем проект и цели бизнеса', 'Определяем структуру сайта, иерархию страниц', 'Договариваемся о сроках и бюджете']
+    items: ['Обсуждаем проект и цели бизнеса', 'Определяем структуру сайта и состав страниц', 'Договариваемся о сроках и бюджете']
   },
   {
     number: '02',
-    title: 'Прототип и дизайн',
+    title: 'Макет и дизайн',
     items: ['Работаем с готовым макетом или создаём дизайн для вас', 'Все решения по дизайну согласуются до начала разработки']
   },
   {
     number: '03',
     title: 'Разработка',
-    items: ['Реализуем сайт и подключаем необходимые сервисы', 'При необходимости подключаем CMS, аналитику и SEO', 'Проверяем работу сайта в современных браузерах и на разных устройствах']
+    items: ['Разрабатываем сайт и подключаем необходимые сервисы', 'При необходимости подключаем CMS, аналитику и SEO-подготовку сайта', 'Проверяем работу сайта в современных браузерах и на разных устройствах']
   },
   {
     number: '04',
@@ -26,11 +26,11 @@ const process = [
 <section class="process section--padded">
   <div class="container">
     <h2 class="section-heading">Как мы создаём сайты</h2>
-    <p class="section-heading__subtitle">Проект проходит через понятные этапы: структура, разработка и передача. После каждого этапа — результат, а не обещание.</p>
+    <p class="section-heading__subtitle">Проект проходит через понятные этапы — от обсуждения идеи до запуска сайта. Каждый следующий этап начинается только после согласования предыдущего.</p>
 
     <div class="process__grid">
       {process.map((step) => (
-          <div class="process__card">
+          <div class="process__card card">
             <span class="process__number">{step.number}</span>
             <h3 class="process__title">{step.title}</h3>
             <ul class="process__list">
@@ -67,21 +67,11 @@ const process = [
   }
 
   .process__card {
-    background: var(--color-bg-primary);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-divider);
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    transition: var(--transition-transform), box-shadow var(--transition-base);
   }
-
-  .process__card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-card);
-  }
-
   .process__number {
     display: block;
     font-size: var(--font-size-3xl);

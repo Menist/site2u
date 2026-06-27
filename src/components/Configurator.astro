@@ -9,7 +9,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
   <div class="container">
     <header class="configurator__header">
       <h2 class="section-heading">Обсудим ваш проект</h2>
-      <p class="section-heading__subtitle">Ответьте на пару вопросов о вашем проекте — или просто оставьте контакты, и мы свяжемся с вами.</p>
+      <p class="section-heading__subtitle">Ответьте на несколько вопросов о проекте или оставьте контакты — мы свяжемся с вами и обсудим детали.</p>
     </header>
     <div class="configurator__stage">
       <div class="configurator__card" data-question-card></div>
@@ -174,7 +174,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
           multiple: false,
           options: [
             {value: 'Лендинг', description: 'Одностраничный сайт'},
-            {value: 'Сайт услуг', description: 'Для компании или специалиста'},
+            {value: 'Сайт услуг', description: 'Для компаний и специалистов'},
             {value: 'Многостраничный сайт', description: 'Корпоративный сайт'},
             {value: 'Не уверен', description: ''}
           ]
@@ -186,7 +186,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
           options: [
             {value: 'Да, дизайн готов', description: ''},
             {value: 'Дизайн в разработке', description: ''},
-            {value: 'Нужен дизайнер', description: ''},
+            {value: 'Нужна помощь с дизайном', description: ''},
             {value: 'Не уверен', description: ''}
           ]
         },
@@ -196,9 +196,9 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
           subTitle: 'Можно выбрать несколько вариантов',
           multiple: true,
           options: [
-            {value: 'SEO', description: 'Подготовка к продвижению'},
-            {value: 'Аналитика', description: 'Google и Яндекс'},
-            {value: 'CMS', description: 'Без программиста'},
+            {value: 'SEO', description: 'Техническая подготовка к продвижению'},
+            {value: 'Аналитика', description: 'Google Analytics и Яндекс.Метрика'},
+            {value: 'CMS', description: 'Самостоятельное редактирование сайта'},
             {value: 'Пока не решил', description: ''}
           ]
         }
@@ -266,7 +266,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
         card.innerHTML = `
           <div class="configurator__card-content">
             ${getProgressBarHtml('finish')}
-            <h3 class="configurator__card-title">Ваш проект</h3>
+            <h3 class="configurator__card-title">Проверьте ваш проект</h3>
             <p class="configurator__helper">Проверьте параметры перед отправкой заявки.</p>
             <div class="configurator__summary-list">
               <div class="configurator__summary-item">
@@ -403,11 +403,12 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
   }
 
   .configurator__card {
-    background: var(--color-bg-secondary);
     border-radius: var(--radius-lg);
     padding: var(--space-xl);
     min-height: 200px;
     overflow: hidden;
+    background: var(--color-bg-primary);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
   }
 
   /* Прогресс-бар */
@@ -488,8 +489,6 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
     align-items: flex-start;
     padding: var(--space-sm) var(--space-md);
     min-width: 160px;
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-divider);
     border-radius: var(--radius-sm);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
@@ -498,12 +497,16 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
     text-align: left;
     transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
     font-family: var(--font-family-base);
+    background: var(--color-bg-secondary);
+    box-shadow: none;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-divider);
   }
 
   .configurator__option:hover {
     border-color: var(--color-accent);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 
   .configurator__option.is-selected {

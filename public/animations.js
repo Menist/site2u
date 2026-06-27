@@ -1,5 +1,5 @@
 /*!
- * site2u.by — Animations v2.0
+ * site2u.by — Animations v2.1
  * Зависимости: GSAP core (~27 KB gzip)
  * Подключить в Layout.astro:
  *   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -17,19 +17,7 @@
      UTILS
   ═══════════════════════════════════════════════════════════════════════════ */
 
-  function splitWords(el) {
-    if (!el) return [];
-    const words = el.textContent.trim().split(/\s+/);
-    el.innerHTML = words
-      .map(
-        (w, i) =>
-          `<span class="word-wrap"><span class="word" style="--i:${i}">${w}</span></span>`
-      )
-      .join(" ");
-    return Array.from(el.querySelectorAll(".word"));
-  }
-
-  function onVisible(elements, callback) {
+  function onVisible(elements, callback, once = true) {
     const targets = Array.isArray(elements) ? elements : [elements];
     if (!targets.length) return;
 
@@ -38,7 +26,7 @@
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
           callback(entry.target);
-          io.unobserve(entry.target);
+          if (once) io.unobserve(entry.target);
         });
       },
       { threshold: 0.1, rootMargin: "0px 0px -300px 0px" }
@@ -49,9 +37,9 @@
       const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
       if (alreadyVisible) {
         callback(el);
-      } else {
-        io.observe(el);
+        if (once) return;
       }
+      io.observe(el);
     });
   }
 
@@ -61,8 +49,8 @@
 
   function initHeroEntrance() {
     const overlay  = document.querySelector(".hero__overlay");
-    const navLinks = document.querySelectorAll(".hero__nav-link");
     const logo     = document.querySelector(".hero__logo");
+    const navLinks = document.querySelectorAll(".hero__nav-link");
     const titleEl  = document.querySelector(".hero__title");
     const subtitle = document.querySelector(".hero__subtitle");
     const cta      = document.querySelector(".hero__cta");
@@ -72,16 +60,27 @@
 
     if (reduced) {
       document
-        .querySelectorAll(".hero__nav-link, .hero__logo, .hero__subtitle, .hero__cta, .hero__arrow")
-        .forEach(el => (el.style.opacity = "1"));
+        .querySelectorAll(".hero__nav-link, .hero__logo, .hero__subtitle, .hero__cta, .hero__arrow, .hero__word")
+        .forEach(el => {
+          if (el) el.style.opacity = "1";
+          if (el && el.style) el.style.transform = "translateY(0)";
+        });
       return;
     }
 
-    const titleWords = splitWords(titleEl);
-    gsap.set(titleWords, { y: "110%", opacity: 0 });
+    // Слова уже есть в DOM, просто получаем их
+    const titleWords = titleEl.querySelectorAll(".hero__word");
+
+    // Устанавливаем начальное состояние через GSAP
+    gsap.set(titleWords, {
+      y: "110%",
+      opacity: 0,
+      clearProps: "all" // очищаем inline стили, которые могли быть установлены CSS
+    });
 
     const tl = gsap.timeline({ defaults: { ease: "expo.out" }, delay: 0.1 });
 
+    // Overlay
     tl.fromTo(
       overlay,
       { opacity: 0.9 },
@@ -89,20 +88,27 @@
       0
     );
 
-    tl.fromTo(
-      logo,
-      { opacity: 0, letterSpacing: "20px" },
-      { opacity: 1, letterSpacing: "5px", duration: 1.3 },
-      0.25
-    );
+    // Logo
+    if (logo) {
+      tl.fromTo(
+        logo,
+        { opacity: 0, letterSpacing: "20px" },
+        { opacity: 1, letterSpacing: "5px", duration: 1.3 },
+        0.25
+      );
+    }
 
-    tl.fromTo(
-      navLinks,
-      { y: -22, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.9, stagger: 0.07 },
-      0.4
-    );
+    // Nav links
+    if (navLinks.length) {
+      tl.fromTo(
+        navLinks,
+        { y: -22, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, stagger: 0.07 },
+        0.4
+      );
+    }
 
+    // Title words — анимация уже готовой структуры
     tl.fromTo(
       titleWords,
       { y: "110%", opacity: 0 },
@@ -110,86 +116,57 @@
       0.75
     );
 
-    tl.fromTo(
-      subtitle,
-      { y: 34, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 },
-      1.15
-    );
+    // Subtitle
+    if (subtitle) {
+      tl.fromTo(
+        subtitle,
+        { y: 34, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
+        1.15
+      );
+    }
 
-    tl.fromTo(
-      cta,
-      { y: 22, opacity: 0, scale: 0.88 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.6)" },
-      1.4
-    );
+    // CTA
+    if (cta) {
+      tl.fromTo(
+        cta,
+        { y: 22, opacity: 0, scale: 0.88 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.6)" },
+        1.4
+      );
+    }
 
-    tl.fromTo(
-      arrow,
-      { y: -10, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 0.7,
-        onComplete() {
-          gsap.to(arrow, {
-            y: 10, duration: 1.1,
-            ease: "sine.inOut", repeat: -1, yoyo: true,
-          });
+    // Arrow with bounce
+    if (arrow) {
+      tl.fromTo(
+        arrow,
+        { y: -10, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.7,
+          onComplete() {
+            gsap.to(arrow, {
+              y: 10, duration: 1.1,
+              ease: "sine.inOut", repeat: -1, yoyo: true,
+            });
+          },
         },
-      },
-      1.65
-    );
+        1.65
+      );
+    }
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     2. SERVICES
+     2. SECTION REVEALS (унифицированная функция)
   ═══════════════════════════════════════════════════════════════════════════ */
 
-  function initServicesReveal() {
-    const section = document.querySelector(".services");
+  function initSectionReveal(selector, className = "is-visible") {
+    const section = document.querySelector(selector);
     if (!section) return;
-    onVisible(section, () => section.classList.add("is-visible")); // ← убрали .services__grid
-  }
-
-  function initAboutReveal() {
-    const section = document.querySelector(".about-teaser");
-    if (!section) return;
-    onVisible(section, () => section.classList.add("is-visible")); // ← убрали .about-teaser__grid
-  }
-
-  function initFeaturesReveal() {
-    const section = document.querySelector(".advantages");
-    if (!section) return;
-    onVisible(section, () => section.classList.add("is-visible")); // ← убрали .advantages__grid
-  }
-
-  function initProcessReveal() {
-    const section = document.querySelector(".process");
-    if (!section) return;
-    onVisible(section, () => section.classList.add("is-visible")); // ← убрали .process__grid
+    onVisible(section, () => section.classList.add(className));
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     6. CONFIGURATOR
-  ═══════════════════════════════════════════════════════════════════════════ */
-
-  function initConfiguratorReveal() {
-    const section = document.querySelector(".configurator");
-    if (!section) return;
-    onVisible(section, () => section.classList.add("is-visible"));
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════════════
-     7. CTA
-  ═══════════════════════════════════════════════════════════════════════════ */
-
-  function initCtaReveal() {
-    const section = document.querySelector(".cta");
-    if (!section) return;
-    onVisible(section, () => section.classList.add("is-visible"));
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════════════
-     8. MAGNETIC BUTTONS
+     3. MAGNETIC BUTTONS
   ═══════════════════════════════════════════════════════════════════════════ */
 
   function initMagneticButtons() {
@@ -217,13 +194,21 @@
     document.documentElement.classList.remove('js-loading');
     document.body.classList.add("js-ready");
 
+    // Инициализируем все анимации
     initHeroEntrance();
-    initServicesReveal();
-    initAboutReveal();
-    initFeaturesReveal();
-    initProcessReveal();
-    initConfiguratorReveal();
-    initCtaReveal();
+
+    // Секции с is-visible
+    const sections = [
+      '.services',
+      '.about-teaser',
+      '.advantages',
+      '.process',
+      '.configurator',
+      '.cta'
+    ];
+
+    sections.forEach(selector => initSectionReveal(selector));
+
     initMagneticButtons();
   }
 

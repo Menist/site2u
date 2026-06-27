@@ -9,9 +9,9 @@ const breadcrumbItems = [
 
 const advantages = [
   {text: 'Оплата по факту готовой работы — без предоплаты'},
-  {text: 'Работаем с вашим макетом или подключаем дизайнера'},
-  {text: 'Подходящий объём работ — платите только за то, что нужно'},
-  {text: 'Остаёмся на связи после запуска и консультируем'},
+  {text: 'Работаем с вашим макетом или помогаем разработать дизайн'},
+  {text: 'Состав проекта определяется вместе с вами — оплачиваете только нужные работы'},
+  {text: 'Остаёмся на связи после запуска и отвечаем на вопросы'},
 ];
 ---
 
@@ -23,16 +23,14 @@ const advantages = [
     <div class="uslugi-page__heading">
       <h1 class="page-heading">Разработка сайтов для бизнеса в Беларуси</h1>
       <span class="service-detail__rule"></span>
-      <p class="uslugi-page__lead">Делаем лендинги и корпоративные сайты — с вниманием к деталям, адаптивом под все
-        устройства и SEO-готовностью по запросу.</p>
+      <p class="uslugi-page__lead">Разрабатываем лендинги и сайты для бизнеса. Работаем по вашему макету или создаём дизайн с нуля, а SEO-подготовку подключаем при необходимости.</p>
     </div>
 
     <div class="uslugi-page__services">
       <a href="/uslugi/landing" class="uslugi-teaser card">
         <div class="uslugi-teaser__body">
           <h2 class="uslugi-teaser__title">Лендинг</h2>
-          <p class="uslugi-teaser__desc">Одностраничный сайт под рекламную кампанию, акцию или мероприятие. Подходит для
-            кафе, салонов, промо-страниц.</p>
+          <p class="uslugi-teaser__desc">Одностраничный сайт для продвижения услуги, акции или мероприятия. Подходит для кафе, салонов и промо-проектов.</p>
           <span class="uslugi-teaser__term">5–10 дней</span>
         </div>
         <span class="uslugi-teaser__arrow">→</span>
@@ -41,8 +39,7 @@ const advantages = [
       <a href="/uslugi/corporate-site" class="uslugi-teaser card card--accent">
         <div class="uslugi-teaser__body">
           <h2 class="uslugi-teaser__title">Корпоративный сайт</h2>
-          <p class="uslugi-teaser__desc">Многостраничный сайт для постоянного присутствия в сети. Подходит для клиник,
-            студий, агентств.</p>
+          <p class="uslugi-teaser__desc">Многостраничный сайт, который помогает рассказать о компании, услугах и способах связи. Подходит для клиник, студий и агентств.</p>
           <span class="uslugi-teaser__term">3–4 недели</span>
         </div>
         <span class="uslugi-teaser__arrow">→</span>
@@ -63,6 +60,7 @@ const advantages = [
         ))}
       </ul>
     </div>
+    <p class="uslugi-page__cta-text">Каждый проект отличается. Кому-то нужен лендинг для запуска новой услуги, а кому-то — многостраничный сайт компании. Поэтому перед началом работы мы обсуждаем задачи проекта и предлагаем только те решения, которые действительно будут полезны.</p>
 
     <div class="uslugi-page__cta">
       <a href="/kontakty" class="uslugi-page__btn">Обсудить проект</a>
@@ -96,7 +94,10 @@ const advantages = [
     gap: var(--space-md);
     margin-bottom: var(--space-2xl);
   }
-
+  .uslugi-page__cta-text{
+    max-width: 950px;
+    margin-bottom: var(--space-2xl);
+  }
   @media (max-width: 768px) {
     .uslugi-page__services {
       grid-template-columns: 1fr;
@@ -146,7 +147,7 @@ const advantages = [
 
   /* Преимущества */
   .uslugi-page__advantages {
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-md);
     max-width: var(--container-sm);
     border-radius: var(--radius-sm);
     background: none;

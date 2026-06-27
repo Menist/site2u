@@ -18,7 +18,8 @@ const { title, forText, items, term, btnText, btnHref, primary = false } = Astro
 
   <div class="service-card__body">
     <h3 class="service-card__title">{title}</h3>
-    <p class="service-card__for"><span class="service-card__label">Подходит для:</span> {forText}</p>
+    <p class="service-card__for">
+      <span class="service-card__label">Подойдет, если нужно</span> {forText}</p>
   </div>
 
   <ul class="service-card__list">
@@ -33,7 +34,7 @@ const { title, forText, items, term, btnText, btnHref, primary = false } = Astro
   </div>
 
   <p class="service-card__design-note">
-    Работаем с вашим макетом или разработаем дизайн с нуля
+    Работаем по готовому макету или поможем создать дизайн с нуля
   </p>
 </article>
 
@@ -115,17 +116,20 @@ const { title, forText, items, term, btnText, btnHref, primary = false } = Astro
     margin-top: var(--space-lg);
     padding: 13px 30px;
     border-radius: var(--radius-full);
-    border: 2px solid var(--color-accent);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-bold);
-    color: var(--color-text-primary);
-    background-color: transparent;
     transition: var(--transition-bg), var(--transition-color), var(--transition-transform);
+    background-color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    color: var(--color-text-primary);
   }
 
   .service-card__btn:hover {
-    background-color: var(--color-accent);
-    color: var(--color-white);
+    transform: translateY(-2px);
+
+    background-color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+    color: var(--color-text-primary);
     transform: translateY(-2px);
   }
 

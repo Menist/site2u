@@ -5,12 +5,15 @@ interface Props {
 
 const { items } = Astro.props;
 ---
+
 <section class="faq">
   <h2 class="block-heading">Частые вопросы</h2>
 
   <div class="faq__card card">
-    <p class="faq__question" data-faq-question>{items[0].question}</p>
-    <p class="faq__answer" data-faq-answer>{items[0].answer}</p>
+    <div class="faq__content">
+      <p class="faq__question" data-faq-question>{items[0].question}</p>
+      <p class="faq__answer" data-faq-answer>{items[0].answer}</p>
+    </div>
 
     <div class="faq__controls">
       <button class="faq__btn" data-faq-prev aria-label="Предыдущий вопрос">←</button>
@@ -18,83 +21,150 @@ const { items } = Astro.props;
       <button class="faq__btn" data-faq-next aria-label="Следующий вопрос">→</button>
     </div>
   </div>
-  </section>
+</section>
 
-  <script define:vars={{ items }}>
-    let currentIndex = 0;
+<script define:vars={{ items }}>
+  let currentIndex = 0;
+  let isTransitioning = false;
 
-    const questionEl = document.querySelector('[data-faq-question]');
-    const answerEl = document.querySelector('[data-faq-answer]');
-    const counterEl = document.querySelector('[data-faq-counter]');
-    const prevBtn = document.querySelector('[data-faq-prev]');
-    const nextBtn = document.querySelector('[data-faq-next]');
+  const contentEl = document.querySelector('.faq__content');
+  const questionEl = document.querySelector('[data-faq-question]');
+  const answerEl = document.querySelector('[data-faq-answer]');
+  const counterEl = document.querySelector('[data-faq-counter]');
+  const prevBtn = document.querySelector('[data-faq-prev]');
+  const nextBtn = document.querySelector('[data-faq-next]');
 
-    function render() {
+  function render(direction = 1) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+
+    // Анимация ухода
+    contentEl.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    contentEl.style.transform = `translateX(${direction * -30}px)`;
+    contentEl.style.opacity = '0';
+
+    setTimeout(() => {
+      // Обновляем контент
       questionEl.textContent = items[currentIndex].question;
       answerEl.textContent = items[currentIndex].answer;
       counterEl.textContent = `${currentIndex + 1} / ${items.length}`;
-    }
 
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % items.length;
-      render();
-    });
+      // Анимация появления
+      contentEl.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+      contentEl.style.transform = `translateX(${direction * 30}px)`;
+      contentEl.style.opacity = '0';
 
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + items.length) % items.length;
-      render();
-    });
-  </script>
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          contentEl.style.transform = 'translateX(0)';
+          contentEl.style.opacity = '1';
+        });
+      });
+    }, 300);
+
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 600);
+  }
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % items.length;
+    render(1);
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    render(-1);
+  });
+</script>
+
 <style>
-.faq {
-  max-width: var(--container-sm);
-  }
-.faq__card {
-  padding: var(--space-lg);
-  text-align: center;
+  .faq {
+    max-width: var(--container-sm);
   }
 
-.faq__question {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-sm);
+  .faq__card {
+    padding: var(--space-lg);
+    text-align: center;
+    overflow: hidden;
   }
 
-.faq__answer {
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
-  margin-bottom: var(--space-md);
+  .faq__content {
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
-.faq__controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
+  .faq__question {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-sm);
+    transition: color 0.3s ease;
   }
 
-.faq__btn {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-circle);
-  background: var(--color-accent);
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-bold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition-bg);
-  cursor: pointer;
-  border: none;
+  .faq__answer {
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+    transition: color 0.3s ease;
   }
 
-.faq__btn:hover {
-  background: var(--color-accent-hover);
+  .faq__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
   }
 
-.faq__counter {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  min-width: 40px;
+  .faq__btn {
+    font-family: var(--font-family-base);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-circle);
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-bg), transform 0.2s ease;
+    cursor: pointer;
+    border: none;
+    user-select: none;
+  }
+
+  .faq__btn:hover {
+    background: var(--color-accent-hover);
+    transform: scale(1.05);
+  }
+
+  .faq__btn:active {
+    transform: scale(0.95);
+  }
+
+  .faq__counter {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    min-width: 40px;
+    transition: color 0.3s ease;
+  }
+
+  /* Анимация для смены вопросов */
+  .faq__content.slide-out-left {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+
+  .faq__content.slide-out-right {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+
+  .faq__content.slide-in-left {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+
+  .faq__content.slide-in-right {
+    transform: translateX(-30px);
+    opacity: 0;
   }
 </style>

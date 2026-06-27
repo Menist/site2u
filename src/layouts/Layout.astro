@@ -31,7 +31,9 @@ interface Props {
 const {title, description, serviceSchema, transparent = false} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL('/og-image.jpg', Astro.site);
+const { bodyClass = '' } = Astro.props;
 ---
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8"/>
@@ -139,7 +141,7 @@ const ogImageURL = new URL('/og-image.jpg', Astro.site);
     });
   </script>
 </head>
-<body>
+<body class={bodyClass}>
 <Header transparent={transparent}/>
 <main>
   <slot/>

@@ -1,7 +1,9 @@
 /* Скрываем Hero-элементы ДО загрузки JS */
 .js-loading .hero__subtitle,
 .js-loading .hero__cta,
-.js-loading .hero__arrow {
+.js-loading .hero__arrow,
+.js-loading .hero__nav-link,
+.js-loading .hero__logo{
   opacity: 0;
 }
 
@@ -14,7 +16,10 @@
   opacity: 0;
   transform: translateY(35px);
 }
-
+.is-home.js-loading .hero__nav-link,
+.is-home.js-loading .hero__logo {
+  opacity: 0;
+}
 html {
   scroll-behavior: smooth;
 }

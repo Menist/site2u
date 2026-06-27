@@ -27,7 +27,7 @@ const navItems = [
       ))}
     </ul>
 
-    <a href="/" class="hero__logo">
+    <a href="/" class="hero__logo" data-no-animation>
       SITE2U
     </a>
 
@@ -58,20 +58,13 @@ const navItems = [
     border-bottom: 1px solid var(--color-divider);
   }
 
-  .header--transparent {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: transparent;
-    border-bottom: none;
-  }
-
   /* Прозрачный хедер (поверх hero-блока) */
   .header--transparent {
     position: absolute;
     top: 0;
     left: 0;
     background: transparent;
+    border-bottom: none;
   }
 
   /* Стили для навигации внутри хедера */
@@ -107,8 +100,19 @@ const navItems = [
   .hero__nav-link.active {
     color: var(--color-accent);
   }
+  [data-no-animation] {
+    animation: none !important;
+    animation-name: none !important;
+    animation-duration: 0s !important;
+    transition: none !important;
+    /* Фиксируем размер */
+    display: inline-block;
+    min-width: 90px;
+    white-space: nowrap;
+  }
 
   /* Логотип */
+
   .hero__logo {
     position: absolute;
     left: 50%;
@@ -118,9 +122,17 @@ const navItems = [
     letter-spacing: 5px;
     color: var(--color-white);
     text-decoration: none;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    display: inline-block;
+    min-width: 90px;
+    white-space: nowrap;
   }
 
-  /* Если хедер НЕ прозрачный, меняем цвета */
+  .hero__logo:hover {
+    opacity: 0.7;
+    color: var(--color-hero-nav-hover);
+  }
+
   .header:not(.header--transparent) .hero__nav-link {
     color: var(--color-text-primary);
   }

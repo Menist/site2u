@@ -1,0 +1,55 @@
+---
+// src/components/HeroTitle.astro
+export interface Props {
+  text: string;
+  tag?: 'h1' | 'h2' | 'h3' | 'h4';
+  class?: string;
+}
+
+const { text, tag: Tag = 'h1', class: className = '' } = Astro.props;
+
+// Разбиваем текст на слова прямо на сервере
+const words = text.trim().split(/\s+/);
+---
+
+<Tag class:list={['hero__title', className]}>
+  {words.map((word, index) => (
+      <span class="hero__word" data-index={index}>
+      {word}
+    </span>
+  ))}
+</Tag>
+
+<style>
+  .hero__title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.15em 0.4em;
+    font-size: clamp(36px, 3.2vw, 62px);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(110%);
+    transition: none; /* GSAP будет управлять анимацией */
+    will-change: transform, opacity;
+  }
+
+  /* Если GSAP не загрузился — показываем слова как запасной вариант */
+  .js-ready .hero__word {
+    /* GSAP сам установит opacity и transform */
+  }
+
+  /* Для пользователей с отключенной анимацией */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__word {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  }
+</style>

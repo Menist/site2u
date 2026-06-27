@@ -1,15 +1,26 @@
 ---
+// src/components/sections/Hero.astro
+import HeroTitle from '../../src/components/HeroTitle.astro';
 ---
+
 <section class="hero">
   <div class="hero__bg"></div>
   <div class="hero__overlay"></div>
   <div class="hero__container">
     <div class="container hero__content">
-      <h1 class="hero__title">Сайты для бизнеса в Беларуси</h1>
-      <p class="hero__subtitle">Создаём сайты услуг, лендинги, сайты-визитки и промо-сайты, которые находят клиентов в
-        Google и Яндекс с первого дня после запуска</p>
-      <a href="/kontakty" class="hero__cta" data-track="hero_cta">Обсудить проект</a>
+      <!-- Используем компонент с серверным разбиением слов -->
+      <HeroTitle text="Сайты для бизнеса в Беларуси" />
+
+      <p class="hero__subtitle">
+        Разрабатываем сайты услуг, лендинги, визитки и промо-страницы.
+        Если у вас уже есть макет — реализуем его. Если нет — поможем с дизайном и подготовим проект с нуля.
+      </p>
+
+      <a href="/kontakty" class="hero__cta" data-track="hero_cta">
+        Обсудить проект
+      </a>
     </div>
+
     <a href="#services" class="hero__arrow" aria-label="Перейти к услугам">
       <span class="hero__arrow-icon"></span>
     </a>
@@ -26,12 +37,11 @@
     overflow: hidden;
   }
 
-
   .hero__bg {
     position: absolute;
     inset: -70px 0;
     background-color: #16213e;
-    background-image: url('/images/hero-bg.jpg');
+    background-image: url('/images/hero-bg.webp');
     background-size: cover;
     background-position: center;
     opacity: 0;
@@ -42,8 +52,9 @@
   }
 
   .hero__bg.loaded {
-    opacity: 1; /* показываем фон */
+    opacity: 1;
   }
+
   .hero__container {
     position: relative;
     z-index: 2;
@@ -55,31 +66,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  .hero__arrow {
-    position: absolute;
-    cursor: pointer;
-    left: 50%;
-    bottom: 38px;
-    transform: translateX(-50%);
-  }
-
-  .hero__arrow:hover .hero__arrow-icon {
-    border-color: var(--color-accent);
-  }
-
-  .hero__arrow-icon {
-    transition: border-color var(--transition-base);
-  }
-
-  .hero__arrow-icon {
-    display: block;
-    width: 22px;
-    height: 22px;
-    border-right: 3px solid var(--color-white);
-    border-bottom: 3px solid var(--color-white);
-    transform: rotate(45deg);
   }
 
   .hero__overlay {
@@ -101,19 +87,14 @@
     will-change: transform;
   }
 
-  .hero__title {
-    font-size: clamp(42px, 3.8vw, 72px);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-    margin-bottom: var(--space-md);
-  }
-
   .hero__subtitle {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-light);
     line-height: var(--line-height-relaxed);
     max-width: var(--container-sm);
     margin: 0 auto var(--space-lg);
+    opacity: 0; /* скрыт до анимации */
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
   }
 
   .hero__cta {
@@ -123,18 +104,52 @@
     min-width: 290px;
     height: 60px;
     padding: 0 var(--space-xl);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-full);
     background-color: var(--color-accent);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-bold);
     color: var(--color-white);
     transition: var(--transition-bg), var(--transition-transform);
+    opacity: 0; /* скрыт до анимации */
   }
 
   .hero__cta:hover {
     background: var(--color-accent-hover);
   }
+
+  .hero__arrow {
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    bottom: 38px;
+    transform: translateX(-50%);
+    opacity: 0; /* скрыт до анимации */
+  }
+
+  .hero__arrow:hover .hero__arrow-icon {
+    border-color: var(--color-accent);
+  }
+
+  .hero__arrow-icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-right: 3px solid var(--color-white);
+    border-bottom: 3px solid var(--color-white);
+    transform: rotate(45deg);
+    transition: border-color var(--transition-base);
+  }
+
+  /* Для пользователей с отключенной анимацией */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__subtitle,
+    .hero__cta,
+    .hero__arrow {
+      opacity: 1 !important;
+    }
+  }
 </style>
+
 <script>
-  import '../scripts/hero-motion.js';
+  import '../../src/scripts/hero-motion';
 </script>
