@@ -136,7 +136,7 @@ img {
   color: var(--color-text-primary);
   text-align: center;
   max-width: var(--container-sm);
-  margin: 0 auto var(--space-md);
+  margin: 0 auto var(--space-lg);
 }
 .section-heading__subtitle {
   text-align: center;
@@ -572,6 +572,8 @@ img {
    СТИЛИ ДЛЯ ВАЛИДАЦИИ
    ========================================================================== */
 
+/* ── 1. ПОЛЯ ── */
+
 /* Поля с ошибкой */
 .contacts__input.is-error,
 .configurator__input.is-error {
@@ -588,19 +590,13 @@ img {
   box-shadow: 0 0 0 3px rgba(76, 175, 125, 0.15);
 }
 
-/* Сообщения об ошибках */
-.field-error {
-  display: block;
-  margin-top: 4px;
-  padding: 4px 8px;
-  font-size: var(--font-size-xs);
-  color: #ff7c7c;
-  background: rgba(255, 124, 124, 0.08);
-  border-radius: var(--radius-sm);
-  animation: errorShake 0.4s ease;
+/* Встряска поля */
+.contacts__input.shake,
+.configurator__input.shake {
+  animation: errorShake 0.5s ease;
 }
+/* ── 2. ПОДСКАЗКИ ── */
 
-/* Подсказки */
 .field-hint {
   display: flex;
   flex-direction: column;
@@ -612,8 +608,13 @@ img {
   background: var(--color-bg-secondary);
   border: 1px dashed var(--color-divider);
   border-radius: var(--radius-sm);
+
+  /* Плавное появление — "выезжание" */
   opacity: 0;
-  animation: hintFadeIn 0.3s ease forwards;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-4px);
+  animation: hintSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .field-hint svg {
@@ -634,44 +635,160 @@ img {
   padding-left: 20px;
 }
 
-/* Анимация встряски */
-@keyframes errorShake {
-  0%, 100% { transform: translateX(0); }
-  10% { transform: translateX(-8px); }
-  30% { transform: translateX(8px); }
-  50% { transform: translateX(-6px); }
-  70% { transform: translateX(6px); }
-  90% { transform: translateX(-3px); }
+/* Скрытие подсказки — плавное сворачивание */
+.field-hint.is-hiding {
+  animation: hintSlideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;}
+
+/* ── 3. ОШИБКИ ── */
+
+.field-error {
+  display: block;
+  margin-top: 4px;
+  padding: 4px 8px;
+  font-size: var(--font-size-xs);
+  color: #ff7c7c;
+  background: rgba(255, 124, 124, 0.08);
+  border-radius: var(--radius-sm);
+
+  /* Плавное появление — "выезжание" */
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateX(-4px);
+  animation: errorSlideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Анимация появления подсказки */
-@keyframes hintFadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Скрытие ошибки — плавное сворачивание */
+.field-error.is-hiding {
+  animation: errorSlideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Класс для встряски (добавляется через JS) */
-.contacts__input.shake,
-.configurator__input.shake {
-  animation: errorShake 0.5s ease;
-}
+/* ── 4. АНИМАЦИИ ── */
 
-/* Для пользователей с reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .field-error {
-    animation: none;
+/* Анимация появления подсказки (выезжание) */
+@keyframes hintSlideIn {
+  0% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-6px) scale(0.97);
+    padding: 0 10px;
+    margin-top: 0;
   }
-  .field-hint {
-    animation: none;
+  30% {
+    opacity: 0.5;
+    max-height: 80px;
+    transform: translateY(0) scale(0.99);
+  }
+  100% {
     opacity: 1;
+    max-height: 80px;
+    transform: translateY(0) scale(1);
+    padding: 6px 10px;
+    margin-top: 4px;
   }
+}
+
+/* Анимация скрытия подсказки (сворачивание) */
+@keyframes hintSlideOut {
+  0% {
+    opacity: 1;
+    max-height: 80px;
+    transform: translateY(0) scale(1);
+    padding: 6px 10px;
+    margin-top: 4px;
+  }
+  70% {
+    opacity: 0.5;
+    max-height: 80px;
+    transform: translateY(-4px) scale(0.97);
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-6px) scale(0.95);
+    padding: 0 10px;
+    margin-top: 0;
+  }
+}
+
+/* Анимация появления ошибки (выезжание) */
+@keyframes errorSlideIn {
+  0% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateX(-8px) scale(0.95);
+    padding: 0 8px;
+    margin-top: 0;
+  }
+  30% {
+    opacity: 0.5;
+    max-height: 60px;
+    transform: translateX(-2px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    max-height: 60px;
+    transform: translateX(0) scale(1);
+    padding: 4px 8px;
+    margin-top: 4px;
+  }
+}
+
+/* Анимация скрытия ошибки (сворачивание) */
+@keyframes errorSlideOut {
+  0% {
+    opacity: 1;
+    max-height: 60px;
+    transform: translateX(0) scale(1);
+    padding: 4px 8px;
+    margin-top: 4px;
+  }
+  70% {
+    opacity: 0.5;
+    max-height: 60px;
+    transform: translateX(-4px) scale(0.97);
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateX(-6px) scale(0.95);
+    padding: 0 8px;
+    margin-top: 0;
+  }
+}
+/* ── 5. REDUCED MOTION ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .field-hint {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .field-hint.is-hiding {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .field-error {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .field-error.is-hiding {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
   .contacts__input.shake,
   .configurator__input.shake {
-    animation: none;
+    animation: none !important;
   }
 }
 
-/* Адаптация для мобильных */
+/* ── 6. МОБИЛЬНАЯ АДАПТАЦИЯ ── */
+
 @media (max-width: 768px) {
   .field-error,
   .field-hint {

@@ -5,51 +5,46 @@
 (function() {
   "use strict";
 
-  // ── Конфигурация ──
+  console.log('✅ validation.js loaded');
+
   const CONFIG = {
-    // Регулярные выражения
     patterns: {
-      // Белорусские номера: +375 (XX) XXX-XX-XX
       phone: /^(\+375|375|80)(29|25|44|33|17)\d{7}$/,
-      // Имя: только буквы, пробелы, дефис, апостроф (минимум 2 символа)
       name: /^[А-Яа-яA-Za-z\s\-']{2,}$/,
-      // Email: стандартный
       email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     },
-    // Сообщения об ошибках
     messages: {
       name: 'Имя должно содержать только буквы (минимум 2 символа)',
-      nameExample: 'Например: Иван',
       phone: 'Введите номер в формате +375 (XX) XXX-XX-XX',
-      phoneExample: 'Например: +375 (29) 123-45-67',
       phoneRequired: 'Введите номер телефона',
       email: 'Введите корректный email',
-      emailExample: 'Например: example@mail.com',
       message: 'Сообщение должно содержать минимум 10 символов',
-      messageExample: 'Напишите кратко о вашем проекте',
       required: 'Это поле обязательно для заполнения',
     }
   };
 
+  // ── Плавное удаление элемента ──
+  function removeWithAnimation(element, className = 'is-hiding', delay = 300) {
+    if (!element) return;
+    element.classList.add(className);
+    setTimeout(() => {
+      if (element.parentNode) {
+        element.remove();
+      }
+    }, delay);
+  }
+
   // ── Форматирование телефона ──
   function formatPhone(input) {
-    // Удаляем все не-цифры
     let value = input.value.replace(/\D/g, '');
-
-    // Если начинается с 8, заменяем на 375
     if (value.startsWith('8')) {
       value = '375' + value.substring(1);
     } else if (!value.startsWith('375') && value.length > 0) {
-      // Если ввели без кода, добавляем 375
       value = '375' + value;
     }
-
-    // Оставляем только 12 цифр (375 + 9 цифр)
     if (value.length > 12) {
       value = value.substring(0, 12);
     }
-
-    // Применяем маску
     let formatted = '';
     if (value.length > 0) {
       formatted = '+375 ';
@@ -74,18 +69,15 @@
         formatted += value.substring(3);
       }
     }
-
     input.value = formatted;
-    return value; // возвращаем "чистый" номер для валидации
+    return value;
   }
 
-  // ── Показать подсказку ──
-  function showHint(field, type) {
-    // Удаляем старую подсказку
+  // ── Создать подсказку ──
+  function createHint(field, type) {
     const oldHint = field.parentElement.querySelector('.field-hint');
     if (oldHint) oldHint.remove();
 
-    // Создаем подсказку
     const hint = document.createElement('span');
     hint.className = 'field-hint';
 
@@ -95,19 +87,19 @@
     switch (type) {
       case 'name':
         hintText = CONFIG.messages.name;
-        exampleText = CONFIG.messages.nameExample;
+        exampleText = 'Например: Иван';
         break;
       case 'phone':
         hintText = CONFIG.messages.phone;
-        exampleText = CONFIG.messages.phoneExample;
+        exampleText = 'Например: +375 (29) 123-45-67';
         break;
       case 'email':
         hintText = CONFIG.messages.email;
-        exampleText = CONFIG.messages.emailExample;
+        exampleText = 'Например: example@mail.com';
         break;
       case 'message':
         hintText = CONFIG.messages.message;
-        exampleText = CONFIG.messages.messageExample;
+        exampleText = 'Напишите кратко о вашем проекте';
         break;
       default:
         return;
@@ -126,67 +118,92 @@
     field.parentElement.appendChild(hint);
   }
 
+  // ── Показать подсказку ──
+  function showHint(field, type) {
+    const oldHint = field.parentElement.querySelector('.field-hint');
+    if (oldHint) {
+      if (oldHint.classList.contains('is-hiding')) return;
+      removeWithAnimation(oldHint);
+      setTimeout(() => {
+        createHint(field, type);
+      }, 300);
+      return;
+    }
+    createHint(field, type);
+  }
+
+  // ── Скрыть подсказку плавно ──
+  function hideHint(field) {
+    const hint = field.parentElement.querySelector('.field-hint');
+    if (hint) {
+      if (hint.classList.contains('is-hiding')) return;
+      removeWithAnimation(hint);
+    }
+  }
+
   // ── Показать ошибку ──
   function showError(field, message) {
-    // Удаляем старую ошибку
     const oldError = field.parentElement.querySelector('.field-error');
-    if (oldError) oldError.remove();
+    if (oldError) {
+      if (oldError.classList.contains('is-hiding')) return;
+      removeWithAnimation(oldError);
+    }
 
-    // Удаляем подсказку
     const oldHint = field.parentElement.querySelector('.field-hint');
-    if (oldHint) oldHint.remove();
+    if (oldHint) {
+      if (oldHint.classList.contains('is-hiding')) return;
+      removeWithAnimation(oldHint);
+    }
 
-    // Создаем ошибку
-    const error = document.createElement('span');
-    error.className = 'field-error';
-    error.textContent = message;
-    error.setAttribute('role', 'alert');
-    field.parentElement.appendChild(error);
+    setTimeout(() => {
+      const error = document.createElement('span');
+      error.className = 'field-error';
+      error.textContent = message;
+      error.setAttribute('role', 'alert');
+      field.parentElement.appendChild(error);
+    }, 150);
 
-    // Встряска поля
     field.classList.add('shake');
     setTimeout(() => field.classList.remove('shake'), 500);
   }
 
   // ── Очистка ошибок ──
-  function clearErrors(field) {
+  function clearErrors(field, keepHint = false) {
     field.classList.remove('is-error', 'is-valid', 'shake');
 
     const error = field.parentElement.querySelector('.field-error');
-    if (error) error.remove();
+    if (error) removeWithAnimation(error);
 
-    const hint = field.parentElement.querySelector('.field-hint');
-    if (hint) hint.remove();
+    if (!keepHint) {
+      const hint = field.parentElement.querySelector('.field-hint');
+      if (hint) removeWithAnimation(hint);
+    }
   }
 
   // ── Основная валидация поля ──
   function validateField(field) {
     const type = field.dataset.validate || field.type;
     const value = field.value.trim();
-    const label = field.parentElement.querySelector('label');
     let isValid = true;
     let errorMessage = '';
 
-    // Очищаем старые ошибки и подсказки
-    clearErrors(field);
+    clearErrors(field, true);
 
-    // Проверка на обязательность
     if (field.required && !value) {
       isValid = false;
       errorMessage = CONFIG.messages.required;
+      showError(field, errorMessage);
+      return false;
     }
 
-    // Проверка по типу
-    if (isValid && value) {
+    if (value) {
       switch (type) {
         case 'name':
           if (!CONFIG.patterns.name.test(value)) {
             isValid = false;
             errorMessage = CONFIG.messages.name;
-            showHint(field, 'name');
           }
           break;
-
         case 'phone':
           const cleanPhone = value.replace(/\D/g, '');
           if (cleanPhone.length === 0) {
@@ -195,46 +212,31 @@
           } else if (!CONFIG.patterns.phone.test(cleanPhone) || cleanPhone.length < 11) {
             isValid = false;
             errorMessage = CONFIG.messages.phone;
-            showHint(field, 'phone');
           }
           break;
-
         case 'email':
           if (!CONFIG.patterns.email.test(value)) {
             isValid = false;
             errorMessage = CONFIG.messages.email;
-            showHint(field, 'email');
           }
           break;
-
         case 'message':
           if (value.length < 10) {
             isValid = false;
             errorMessage = CONFIG.messages.message;
-            showHint(field, 'message');
           }
           break;
       }
     }
 
-    // Показываем результат
     if (!isValid && value) {
-      field.classList.add('is-error');
       showError(field, errorMessage);
-    } else if (!isValid && !value && field.required) {
-      field.classList.add('is-error');
-      showError(field, CONFIG.messages.required);
+      setTimeout(() => {
+        showHint(field, type);
+      }, 200);
     } else if (isValid && value) {
       field.classList.add('is-valid');
-    }
-
-    // Обновляем лейбл при ошибке
-    if (label) {
-      if (field.classList.contains('is-error')) {
-        label.style.color = '#ff7c7c';
-      } else {
-        label.style.color = '';
-      }
+      hideHint(field);
     }
 
     return isValid;
@@ -246,7 +248,6 @@
     let isValid = true;
 
     fields.forEach(field => {
-      // Для телефона сначала форматируем
       if (field.dataset.validate === 'phone' || field.type === 'tel') {
         const clean = formatPhone(field);
         if (clean.length > 0 && clean.length < 11) {
@@ -266,59 +267,33 @@
     return isValid;
   }
 
-  // ── Обработчики событий ──
+  // ── Инициализация формы ──
   function initForm(form) {
-    // Все поля с валидацией
+    console.log('✅ Инициализация формы:', form.id || 'форма без ID');
+
     const fields = form.querySelectorAll('[data-validate], [required]');
+    console.log('Найдено полей для валидации:', fields.length);
 
     fields.forEach(field => {
-      // Валидация при вводе
       field.addEventListener('input', function() {
-        // Для телефона — форматирование
         if (this.dataset.validate === 'phone' || this.type === 'tel') {
           const clean = formatPhone(this);
-          // Валидируем только если введено достаточно цифр
-          if (clean.length >= 11) {
+          if (clean.length > 0) {
             validateField(this);
-          } else if (clean.length > 0) {
-            // Показываем подсказку при вводе
-            this.classList.remove('is-error', 'is-valid');
-            const error = this.parentElement.querySelector('.field-error');
-            if (error) error.remove();
-            showHint(this, 'phone');
-          } else {
-            clearErrors(this);
           }
         } else {
           validateField(this);
         }
       });
 
-      // Валидация при потере фокуса
       field.addEventListener('blur', function() {
-        // Для телефона проверяем, если есть хоть что-то
-        if (this.dataset.validate === 'phone' || this.type === 'tel') {
-          const clean = this.value.replace(/\D/g, '');
-          if (clean.length > 0) {
-            if (clean.length < 11) {
-              this.classList.add('is-error');
-              showError(this, CONFIG.messages.phone);
-              showHint(this, 'phone');
-            } else {
-              validateField(this);
-            }
-          }
-        } else {
-          if (this.value.trim() || this.required) {
-            validateField(this);
-          }
+        if (this.value.trim() || this.required) {
+          validateField(this);
         }
+        hideHint(this);
       });
 
-      // Очистка ошибок при фокусе
       field.addEventListener('focus', function() {
-        clearErrors(this);
-        // Показываем подсказку для пустых полей
         if (!this.value.trim()) {
           const type = this.dataset.validate || this.type;
           if (['name', 'phone', 'email', 'message'].includes(type)) {
@@ -328,24 +303,19 @@
       });
     });
 
-    // Валидация при отправке
     form.addEventListener('submit', function(e) {
-      // Для телефона проверяем все поля перед отправкой
-      const phoneFields = this.querySelectorAll('[data-validate="phone"], input[type="tel"]');
-      phoneFields.forEach(field => {
-        const clean = field.value.replace(/\D/g, '');
-        if (clean.length > 0 && clean.length < 11) {
-          field.classList.add('is-error');
-          showError(field, CONFIG.messages.phone);
-          showHint(field, 'phone');
-        } else if (clean.length >= 11) {
-          validateField(field);
+      console.log('📤 Отправка формы, проверяем валидацию...');
+
+      let isValid = true;
+      fields.forEach(field => {
+        if (!validateField(field)) {
+          isValid = false;
         }
       });
 
-      if (!validateForm(this)) {
+      if (!isValid) {
         e.preventDefault();
-        // Прокручиваем к первому полю с ошибкой
+        console.log('❌ Форма содержит ошибки');
         const firstError = this.querySelector('.is-error');
         if (firstError) {
           firstError.focus();
@@ -353,21 +323,27 @@
         }
         return false;
       }
+      console.log('✅ Форма валидна, отправляем...');
     });
   }
 
   // ── Инициализация всех форм ──
   function initAllForms() {
-    // Конфигуратор (модалка)
-    const modalForm = document.getElementById('modalContactForm');
-    if (modalForm) initForm(modalForm);
+    console.log('🔍 Поиск форм...');
 
-    // Контакты (основная форма)
+    const modalForm = document.getElementById('modalContactForm');
+    if (modalForm) {
+      console.log('✅ Найдена форма modalContactForm');
+      initForm(modalForm);
+    }
+
     const contactForm = document.getElementById('contactForm');
-    if (contactForm) initForm(contactForm);
+    if (contactForm) {
+      console.log('✅ Найдена форма contactForm');
+      initForm(contactForm);
+    }
   }
 
-  // ── Запуск ──
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAllForms);
   } else {
