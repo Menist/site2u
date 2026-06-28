@@ -1033,20 +1033,12 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
     // Теперь валидация в validation.js
 
     form.addEventListener('submit', async (e) => {
-      // Проверяем наличие ошибок валидации
+      e.preventDefault();
+
+      // Если validation.js нашёл ошибки — классы is-error уже расставлены
       const hasErrors = form.querySelectorAll('.is-error').length > 0;
       if (hasErrors) {
-        e.preventDefault();
         showStatus('Пожалуйста, исправьте ошибки в форме.', 'error');
-        return;
-      }
-
-      // Дополнительная проверка на пустые поля
-      const name = form.querySelector('[name="from_name"]');
-      const phone = form.querySelector('[name="from_phone"]');
-      if (!name.value.trim() || !phone.value.trim()) {
-        e.preventDefault();
-        showStatus('Пожалуйста, заполните обязательные поля.', 'error');
         return;
       }
 

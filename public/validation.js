@@ -35,42 +35,54 @@
   }
 
   // ── Форматирование телефона ──
+  // Простая маска: берём цифры из ввода, форматируем как +375 (XX) XXX-XX-XX.
+  // Пользователь может начать с «+» — он принимается и поглощается маской.
   function formatPhone(input) {
-    let value = input.value.replace(/\D/g, '');
-    if (value.startsWith('8')) {
-      value = '375' + value.substring(1);
-    } else if (!value.startsWith('375') && value.length > 0) {
-      value = '375' + value;
+    const cursorPosBefore = input.selectionStart;
+    const valueBefore = input.value;
+
+    // Оставляем только цифры (+ игнорируем — маска сама его добавит)
+    let digits = input.value.replace(/\D/g, '');
+
+    // Если поле содержит только «+» — оставляем его, не трогаем
+    if (input.value === '+') {
+      return '';
     }
-    if (value.length > 12) {
-      value = value.substring(0, 12);
+
+    // Ограничиваем до 12 цифр (375 + 2 кода + 7 номера)
+    if (digits.length > 12) digits = digits.substring(0, 12);
+
+    // Если ввели 8 в начале — заменяем на 375
+    if (digits.startsWith('8') && digits.length >= 1) {
+      digits = '375' + digits.substring(1);
     }
+
+    // Строим отформатированную строку по мере наличия цифр
     let formatted = '';
-    if (value.length > 0) {
-      formatted = '+375 ';
-      if (value.length > 3) {
-        formatted += '(' + value.substring(3, 5) + ') ';
-        if (value.length > 5) {
-          formatted += value.substring(5, 8) + '-';
-          if (value.length > 8) {
-            formatted += value.substring(8, 10) + '-';
-            if (value.length > 10) {
-              formatted += value.substring(10, 12);
-            } else {
-              formatted += value.substring(10);
-            }
-          } else {
-            formatted += value.substring(8);
-          }
-        } else {
-          formatted += value.substring(5);
-        }
-      } else {
-        formatted += value.substring(3);
-      }
+    if (digits.length === 0) {
+      formatted = '';
+    } else if (digits.length <= 3) {
+      formatted = '+' + digits;
+    } else if (digits.length <= 5) {
+      formatted = '+' + digits.substring(0, 3) + ' (' + digits.substring(3);
+    } else if (digits.length <= 8) {
+      formatted = '+' + digits.substring(0, 3) + ' (' + digits.substring(3, 5) + ') ' + digits.substring(5);
+    } else if (digits.length <= 10) {
+      formatted = '+' + digits.substring(0, 3) + ' (' + digits.substring(3, 5) + ') ' + digits.substring(5, 8) + '-' + digits.substring(8);
+    } else {
+      formatted = '+' + digits.substring(0, 3) + ' (' + digits.substring(3, 5) + ') ' + digits.substring(5, 8) + '-' + digits.substring(8, 10) + '-' + digits.substring(10, 12);
     }
+
     input.value = formatted;
-    return value;
+
+    // Корректируем позицию курсора: сдвигаем на разницу длин (из-за добавленных символов маски)
+    const diff = formatted.length - valueBefore.length;
+    const newCursor = Math.max(0, cursorPosBefore + diff);
+    try {
+      input.setSelectionRange(newCursor, newCursor);
+    } catch (_) {}
+
+    return digits;
   }
 
   // ── Создать подсказку ──
@@ -143,27 +155,26 @@
 
   // ── Показать ошибку ──
   function showError(field, message) {
+    // Убираем старую ошибку
     const oldError = field.parentElement.querySelector('.field-error');
     if (oldError) {
-      if (oldError.classList.contains('is-hiding')) return;
-      removeWithAnimation(oldError);
+      oldError.remove();
     }
 
+    // Убираем подсказку — она не должна перекрывать ошибку
     const oldHint = field.parentElement.querySelector('.field-hint');
     if (oldHint) {
-      if (oldHint.classList.contains('is-hiding')) return;
-      removeWithAnimation(oldHint);
+      oldHint.remove();
     }
 
-    setTimeout(() => {
-      const error = document.createElement('span');
-      error.className = 'field-error';
-      error.textContent = message;
-      error.setAttribute('role', 'alert');
-      field.parentElement.appendChild(error);
-    }, 150);
+    const error = document.createElement('span');
+    error.className = 'field-error';
+    error.textContent = message;
+    error.setAttribute('role', 'alert');
+    field.parentElement.appendChild(error);
 
-    field.classList.add('shake');
+    field.classList.remove('is-valid');
+    field.classList.add('is-error', 'shake');
     setTimeout(() => field.classList.remove('shake'), 500);
   }
 
@@ -172,11 +183,11 @@
     field.classList.remove('is-error', 'is-valid', 'shake');
 
     const error = field.parentElement.querySelector('.field-error');
-    if (error) removeWithAnimation(error);
+    if (error) error.remove();
 
     if (!keepHint) {
       const hint = field.parentElement.querySelector('.field-hint');
-      if (hint) removeWithAnimation(hint);
+      if (hint) hint.remove();
     }
   }
 
@@ -231,9 +242,8 @@
 
     if (!isValid && value) {
       showError(field, errorMessage);
-      setTimeout(() => {
-        showHint(field, type);
-      }, 200);
+      // Подсказку НЕ показываем — она перекрывает ошибку.
+      // Пользователь видит ошибку, исправляет → при новом фокусе подсказка появится.
     } else if (isValid && value) {
       field.classList.add('is-valid');
       hideHint(field);
@@ -250,10 +260,8 @@
     fields.forEach(field => {
       if (field.dataset.validate === 'phone' || field.type === 'tel') {
         const clean = formatPhone(field);
-        if (clean.length > 0 && clean.length < 11) {
-          field.classList.add('is-error');
+        if (clean.length > 0 && clean.length < 12) {
           showError(field, CONFIG.messages.phone);
-          showHint(field, 'phone');
           isValid = false;
           return;
         }
@@ -280,6 +288,8 @@
           const clean = formatPhone(this);
           if (clean.length > 0) {
             validateField(this);
+          } else {
+            clearErrors(this);
           }
         } else {
           validateField(this);
@@ -306,15 +316,14 @@
     form.addEventListener('submit', function(e) {
       console.log('📤 Отправка формы, проверяем валидацию...');
 
-      let isValid = true;
-      fields.forEach(field => {
-        if (!validateField(field)) {
-          isValid = false;
-        }
-      });
+      // Скрываем все подсказки перед финальной проверкой
+      fields.forEach(field => hideHint(field));
+
+      const isValid = validateForm(form);
 
       if (!isValid) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         console.log('❌ Форма содержит ошибки');
         const firstError = this.querySelector('.is-error');
         if (firstError) {
