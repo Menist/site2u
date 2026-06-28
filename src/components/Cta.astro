@@ -47,4 +47,78 @@
     background: var(--color-accent-hover);
     transform: translateY(-2px);
   }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: cta
+   ========================================================================== */
+
+  /* ===== Планшеты (до 768px) ===== */
+  @media (max-width: 768px) {
+    .cta__inner {
+      gap: var(--space-sm);
+    }
+
+    .cta__title {
+      font-size: var(--font-size-xl);
+      max-width: 100%;
+    }
+
+    .cta__subtitle {
+      font-size: var(--font-size-base);
+      max-width: 100%;
+      padding: 0 var(--space-sm);
+    }
+
+    .cta__btn {
+      padding: var(--space-sm) var(--space-lg);
+      font-size: var(--font-size-base);
+      min-height: var(--touch-target-min);
+    }
+  }
+
+  /* ===== Мобильные (до 576px) ===== */
+  @media (max-width: 576px) {
+    .cta__inner {
+      gap: var(--space-xs);
+    }
+
+    .cta__title {
+      font-size: var(--font-size-lg);
+      margin-bottom: 0;
+    }
+
+    .cta__subtitle {
+      font-size: var(--font-size-sm);
+      padding: 0;
+      margin-bottom: var(--space-xs);
+    }
+
+    .cta__btn {
+      padding: var(--space-xs) var(--space-lg);
+      font-size: var(--font-size-sm);
+      min-height: var(--touch-target-min);
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 400px) ===== */
+  @media (max-width: 400px) {
+    .cta__title {
+      font-size: var(--font-size-md);
+    }
+
+    .cta__subtitle {
+      font-size: var(--font-size-xs);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .cta__btn {
+      padding: var(--space-xs) var(--space-md);
+      font-size: var(--font-size-xs);
+      max-width: 100%;
+      min-height: 40px;
+    }
+  }
 </style>

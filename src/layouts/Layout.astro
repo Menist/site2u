@@ -26,6 +26,7 @@ interface Props {
   description: string;
   serviceSchema?: object;
   transparent?: boolean
+  bodyClass: string
 }
 
 const {title, description, serviceSchema, transparent = false} = Astro.props;
@@ -56,6 +57,7 @@ const { bodyClass = '' } = Astro.props;
   <script is:inline>
     document.documentElement.classList.add('js-loading');
   </script>
+
   <meta name="viewport" content="width=device-width"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="icon" href="/favicon.ico"/>
@@ -140,6 +142,7 @@ const { bodyClass = '' } = Astro.props;
       }
     });
   </script>
+  <script defer src="/validation.js"></script>
 </head>
 <body class={bodyClass}>
 <Header transparent={transparent}/>
@@ -165,5 +168,14 @@ const { bodyClass = '' } = Astro.props;
 
   main {
     flex: 1;
+  }
+
+
+  @media (max-width: 768px) {
+    html,
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
   }
 </style>

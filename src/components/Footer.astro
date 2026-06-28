@@ -132,4 +132,176 @@ const navItems = [
     font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
   }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: footer
+   ========================================================================== */
+
+  /* ===== Планшеты (до 992px) ===== */
+  @media (max-width: 992px) {
+    .footer__grid {
+      gap: var(--space-xl);
+      grid-template-columns: 1.2fr 1fr 1fr;
+    }
+
+    .footer__desc {
+      max-width: 100%;
+      font-size: var(--font-size-sm);
+    }
+
+    .footer__nav-title {
+      font-size: 11px;
+    }
+
+    .footer__nav-link,
+    .footer__contact-link,
+    .footer__address {
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  /* ===== Мобильные (до 768px) ===== */
+  @media (max-width: 768px) {
+    .footer {
+      padding-top: var(--space-xs);
+    }
+
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-sm);
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+
+    .footer__logo {
+      font-size: var(--font-size-md);
+      margin-bottom: var(--space-xs);
+    }
+
+    .footer__desc {
+      font-size: var(--font-size-sm);
+      max-width: 100%;
+    }
+
+    .footer__nav-title {
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .footer__nav-list,
+    .footer__contacts-list {
+      gap: 6px;
+    }
+
+    .footer__nav-link,
+    .footer__contact-link,
+    .footer__address {
+      font-size: var(--font-size-sm);
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      padding: var(--space-xs) 0;
+    }
+
+    .footer__copy,
+    .footer__made {
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  /* ===== Маленькие телефоны (до 480px) ===== */
+  @media (max-width: 480px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      padding-bottom: var(--space-sm);
+    }
+
+    .footer__brand {
+      grid-column: 1;
+    }
+
+    .footer__logo {
+      font-size: var(--font-size-base);
+      margin-bottom: 4px;
+    }
+
+    .footer__desc {
+      font-size: var(--font-size-sm);
+    }
+
+    .footer__nav-title {
+      font-size: 10px;
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .footer__nav-list,
+    .footer__contacts-list {
+      gap: 4px;
+    }
+
+    .footer__nav-link,
+    .footer__contact-link,
+    .footer__address {
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .footer__nav {
+      order: 2;
+    }
+
+    .footer__contacts {
+      order: 3;
+    }
+
+    .footer__bottom {
+      gap: 2px;
+      padding: var(--space-xs) 0;
+    }
+
+    .footer__copy,
+    .footer__made {
+      font-size: 11px;
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 360px) ===== */
+  @media (max-width: 360px) {
+    .footer__grid {
+      gap: var(--space-sm);
+      padding-bottom: var(--space-xs);
+    }
+
+    .footer__logo {
+      font-size: var(--font-size-sm);
+    }
+
+    .footer__desc {
+      font-size: var(--font-size-xs);
+    }
+
+    .footer__nav-title {
+      font-size: 9px;
+    }
+
+    .footer__nav-link,
+    .footer__contact-link,
+    .footer__address {
+      font-size: var(--font-size-xs);
+    }
+
+    .footer__copy,
+    .footer__made {
+      font-size: 10px;
+    }
+  }
 </style>

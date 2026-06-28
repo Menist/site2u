@@ -1,4 +1,7 @@
 ---
+// src/components/Header.astro
+import MobileMenu from './MobileMenu.astro';
+
 const { transparent = false } = Astro.props;
 interface Props {
   transparent?: boolean
@@ -43,8 +46,17 @@ const navItems = [
           </li>
       ))}
     </ul>
+
+    <!-- Кнопка бургер-меню (только на мобильных) -->
+    <button class="hero__burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+      <span class="hero__burger-line"></span>
+      <span class="hero__burger-line"></span>
+      <span class="hero__burger-line"></span>
+    </button>
   </nav>
 </header>
+
+<MobileMenu navItems={navItems} />
 
 <style>
   .header {
@@ -58,7 +70,6 @@ const navItems = [
     border-bottom: 1px solid var(--color-divider);
   }
 
-  /* Прозрачный хедер (поверх hero-блока) */
   .header--transparent {
     position: absolute;
     top: 0;
@@ -67,7 +78,6 @@ const navItems = [
     border-bottom: none;
   }
 
-  /* Стили для навигации внутри хедера */
   .hero__header {
     position: relative;
     display: flex;
@@ -96,22 +106,19 @@ const navItems = [
     color: var(--color-hero-nav-hover);
   }
 
-  /* Активная ссылка */
   .hero__nav-link.active {
     color: var(--color-accent);
   }
+
   [data-no-animation] {
     animation: none !important;
     animation-name: none !important;
     animation-duration: 0s !important;
     transition: none !important;
-    /* Фиксируем размер */
     display: inline-block;
     min-width: 90px;
     white-space: nowrap;
   }
-
-  /* Логотип */
 
   .hero__logo {
     position: absolute;
@@ -144,4 +151,130 @@ const navItems = [
   .header:not(.header--transparent) .hero__nav-link:hover {
     color: var(--color-accent);
   }
+
+  /* ===== Бургер-меню (кнопка) ===== */
+  .hero__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--space-xs);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+  }
+
+  .hero__burger-line {
+    display: block;
+    width: 28px;
+    height: 2.5px;
+    background: var(--color-text-primary);
+    border-radius: var(--radius-full);
+    transition: var(--transition-transform), var(--transition-opacity);
+    transform-origin: center;
+  }
+
+  /* Цвет линий для прозрачного хедера */
+  .header--transparent .hero__burger-line {
+    background: var(--color-white);
+  }
+
+  /* Анимация бургера в крестик (при открытом меню) */
+  .hero__burger.is-active .hero__burger-line:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .hero__burger.is-active .hero__burger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hero__burger.is-active .hero__burger-line:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+
+  /* ===== Адаптив: показываем бургер на мобильных ===== */
+  @media (max-width: 768px) {
+    .hero__nav {
+      display: none;
+    }
+
+    .hero__logo {
+      position: static;
+      transform: none;
+    }
+
+    .hero__header {
+      justify-content: space-between;
+    }
+
+    .hero__burger {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero__burger-line {
+      width: 24px;
+      height: 2px;
+    }
+
+    .hero__burger.is-active .hero__burger-line:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .hero__burger.is-active .hero__burger-line:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .hero__logo {
+      font-size: var(--font-size-base);
+      min-width: 60px;
+      letter-spacing: 2px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .hero__logo {
+      font-size: var(--font-size-sm);
+      min-width: 50px;
+      letter-spacing: 1.5px;
+    }
+
+    .hero__burger-line {
+      width: 20px;
+      height: 2px;
+    }
+
+    .hero__burger.is-active .hero__burger-line:nth-child(1) {
+      transform: translateY(5px) rotate(45deg);
+    }
+
+    .hero__burger.is-active .hero__burger-line:nth-child(3) {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+  }
 </style>
+
+<script>
+  // ===== Логика бургер-меню =====
+  document.addEventListener('DOMContentLoaded', () => {
+    const burgerBtn = document.getElementById('burgerBtn');
+
+    if (burgerBtn) {
+      burgerBtn.addEventListener('click', () => {
+        const isOpen = burgerBtn.classList.toggle('is-active');
+        burgerBtn.setAttribute('aria-expanded', isOpen);
+
+        if (isOpen) {
+          window.openMobileMenu?.();
+        } else {
+          window.closeMobileMenu?.();
+        }
+      });
+    }
+  });
+</script>

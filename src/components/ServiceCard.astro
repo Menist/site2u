@@ -153,4 +153,301 @@ const { title, forText, items, term, btnText, btnHref, primary = false } = Astro
     margin-top: auto;
     width: 100%;
   }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: service-card
+   ========================================================================== */
+
+  /* ===== Планшеты (до 992px) ===== */
+  @media (max-width: 992px) {
+    .service-card {
+      width: 100%;
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .service-card__title {
+      font-size: var(--font-size-md);
+      margin-top: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .service-card__for {
+      font-size: var(--font-size-sm);
+      margin-top: calc(var(--space-xs) * -0.5);
+      margin-bottom: var(--space-md);
+    }
+
+    .service-card__list {
+      gap: 6px;
+    }
+
+    .service-card__list li {
+      font-size: var(--font-size-sm);
+      padding-left: var(--space-sm);
+    }
+
+    .service-card__list li::before {
+      margin-right: 4px;
+    }
+
+    .service-card__term {
+      font-size: var(--font-size-sm);
+      margin-top: var(--space-md);
+      padding-top: var(--space-sm);
+    }
+
+    .service-card__btn {
+      padding: 11px 24px;
+      font-size: var(--font-size-xs);
+      min-height: var(--touch-target-min);
+    }
+
+    .service-card__design-note {
+      font-size: var(--font-size-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .service-card__body {
+      gap: 4px;
+    }
+
+    .service-card__footer {
+      gap: var(--space-xs);
+    }
+  }
+
+  /* ===== Мобильные (до 768px) ===== */
+  @media (max-width: 768px) {
+    .service-card {
+      width: 100%;
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+    }
+
+    .service-card:hover {
+      transform: none;
+      box-shadow: var(--shadow-card);
+    }
+
+    .service-card--primary:hover {
+      box-shadow: var(--shadow-card);
+    }
+
+    .service-card__icon {
+      font-size: var(--font-size-xl);
+    }
+
+    .service-card__title {
+      font-size: var(--font-size-base);
+      margin-top: var(--space-xs);
+      margin-bottom: var(--space-xs);
+    }
+
+    .service-card__for {
+      font-size: var(--font-size-sm);
+      margin-top: 0;
+      margin-bottom: var(--space-sm);
+    }
+
+    .service-card__list {
+      gap: 4px;
+      width: 100%;
+      text-align: left;
+      padding-left: 0;
+    }
+
+    .service-card__list li {
+      font-size: var(--font-size-sm);
+      padding-left: var(--space-sm);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .service-card__list li::before {
+      margin-right: 6px;
+    }
+
+    .service-card__term {
+      font-size: var(--font-size-sm);
+      margin-top: var(--space-sm);
+      padding-top: var(--space-xs);
+    }
+
+    .service-card__btn {
+      padding: 10px 20px;
+      font-size: var(--font-size-xs);
+      min-height: var(--touch-target-min);
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .service-card__design-note {
+      font-size: var(--font-size-xs);
+      margin-top: var(--space-xs);
+    }
+
+    .service-card__footer {
+      gap: 6px;
+    }
+  }
+
+  /* ===== Маленькие телефоны (до 480px) ===== */
+  @media (max-width: 480px) {
+    .service-card {
+      padding: var(--space-sm);
+      border-radius: var(--radius-sm);
+    }
+
+    .service-card__title {
+      font-size: var(--font-size-base);
+      margin-top: var(--space-xs);
+      margin-bottom: 4px;
+    }
+
+    .service-card__for {
+      font-size: var(--font-size-xs);
+      margin-bottom: var(--space-sm);
+    }
+
+    .service-card__list {
+      gap: 3px;
+    }
+
+    .service-card__list li {
+      font-size: var(--font-size-xs);
+      padding-left: var(--space-sm);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .service-card__list li::before {
+      margin-right: 4px;
+    }
+
+    .service-card__term {
+      font-size: var(--font-size-xs);
+      margin-top: var(--space-sm);
+      padding-top: 6px;
+    }
+
+    .service-card__btn {
+      padding: 8px 16px;
+      font-size: var(--font-size-xs);
+      min-height: var(--touch-target-min);
+      max-width: 100%;
+    }
+
+    .service-card__design-note {
+      font-size: var(--font-size-xs);
+      margin-top: 4px;
+    }
+
+    .service-card__footer {
+      gap: 4px;
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 360px) ===== */
+  @media (max-width: 360px) {
+    .service-card {
+      padding: var(--space-xs);
+    }
+
+    .service-card__title {
+      font-size: var(--font-size-sm);
+    }
+
+    .service-card__for {
+      font-size: var(--font-size-xs);
+    }
+
+    .service-card__list li {
+      font-size: 12px;
+      padding-left: var(--space-xs);
+    }
+
+    .service-card__list li::before {
+      margin-right: 3px;
+    }
+
+    .service-card__term {
+      font-size: 12px;
+    }
+
+    .service-card__btn {
+      font-size: 11px;
+      padding: 6px 12px;
+      min-height: 36px;
+    }
+
+    .service-card__design-note {
+      font-size: 11px;
+    }
+  }
+
+  /* ==========================================================================
+     ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ
+     ========================================================================== */
+
+  /* Если карточки используются в сетке из 2-х колонок на десктопе */
+  @media (min-width: 993px) {
+    .service-card {
+      width: 50%;
+      /* Карточка занимает половину контейнера */
+    }
+
+    /* Для четных карточек можно добавить отступ справа */
+    .service-card:not(:last-child) {
+      margin-right: var(--space-md);
+    }
+  }
+
+  /* Если карточки в ряд на планшетах */
+  @media (min-width: 769px) and (max-width: 992px) {
+    .service-card {
+      width: calc(50% - var(--space-sm) / 2);
+      margin-right: var(--space-sm);
+    }
+
+    .service-card:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+
+  /* Адаптация для контейнера с карточками (если используется flex) */
+  .service-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    .service-card-wrapper {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .service-card-wrapper .service-card {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+
+  /* Адаптация для длинных заголовков */
+  @media (max-width: 768px) {
+    .service-card__title:has(+ .service-card__for) {
+      word-break: break-word;
+      hyphens: auto;
+    }
+  }
+
+  /* Улучшение читаемости на мобильных */
+  @media (max-width: 480px) {
+    .service-card__body {
+      width: 100%;
+    }
+
+    .service-card__list {
+      text-align: left;
+      padding-left: 0;
+    }
+  }
 </style>

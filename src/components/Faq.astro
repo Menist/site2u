@@ -167,4 +167,138 @@ const { items } = Astro.props;
     transform: translateX(-30px);
     opacity: 0;
   }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: faq
+   ========================================================================== */
+
+  /* ===== Планшеты (до 992px) ===== */
+  @media (max-width: 992px) {
+    .faq {
+      max-width: 100%;
+      padding: 0 var(--space-sm);
+    }
+
+    .faq__card {
+      padding: var(--space-lg);
+    }
+
+    .faq__question {
+      font-size: var(--font-size-md);
+    }
+
+    .faq__answer {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* ===== Мобильные (до 768px) ===== */
+  @media (max-width: 768px) {
+    .faq {
+      padding: 0;
+    }
+
+    .faq__card {
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+    }
+
+    .faq__question {
+      font-size: var(--font-size-base);
+      margin-bottom: var(--space-xs);
+      line-height: var(--line-height-tight);
+    }
+
+    .faq__answer {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-md);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .faq__controls {
+      gap: var(--space-sm);
+    }
+
+    .faq__btn {
+      width: 44px;
+      height: 44px;
+      font-size: var(--font-size-md);
+      min-height: var(--touch-target-min);
+      min-width: var(--touch-target-min);
+    }
+
+    .faq__counter {
+      font-size: var(--font-size-sm);
+      min-width: 50px;
+    }
+  }
+
+  /* ===== Маленькие телефоны (до 480px) ===== */
+  @media (max-width: 480px) {
+    .faq__card {
+      padding: var(--space-sm);
+    }
+
+    .faq__question {
+      font-size: var(--font-size-sm);
+      margin-bottom: 6px;
+    }
+
+    .faq__answer {
+      font-size: var(--font-size-xs);
+      margin-bottom: var(--space-sm);
+      line-height: var(--line-height-loose);
+    }
+
+    .faq__controls {
+      gap: var(--space-xs);
+    }
+
+    .faq__btn {
+      width: 40px;
+      height: 40px;
+      font-size: var(--font-size-sm);
+      min-height: 40px;
+      min-width: 40px;
+    }
+
+    .faq__btn:hover {
+      transform: none;
+    }
+
+    .faq__counter {
+      font-size: var(--font-size-xs);
+      min-width: 44px;
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 360px) ===== */
+  @media (max-width: 360px) {
+    .faq__card {
+      padding: var(--space-xs);
+    }
+
+    .faq__question {
+      font-size: var(--font-size-xs);
+      margin-bottom: 4px;
+    }
+
+    .faq__answer {
+      font-size: 12px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .faq__btn {
+      width: 36px;
+      height: 36px;
+      font-size: var(--font-size-xs);
+      min-height: 36px;
+      min-width: 36px;
+    }
+
+    .faq__counter {
+      font-size: 11px;
+      min-width: 38px;
+    }
+  }
 </style>

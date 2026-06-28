@@ -54,4 +54,85 @@ const breadcrumbSchema={
     margin-left: var(--space-xs);
     color: var(--color-divider);
   }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: breadcrumbs
+   ========================================================================== */
+
+  /* ===== Планшеты (до 768px) ===== */
+  @media (max-width: 768px) {
+    .breadcrumbs {
+      gap: 6px;
+      font-size: var(--font-size-xs);
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-xs);
+    }
+
+    .breadcrumbs a:not(:last-child)::after {
+      margin-left: 6px;
+    }
+  }
+
+  /* ===== Мобильные (до 576px) ===== */
+  @media (max-width: 576px) {
+    .breadcrumbs {
+      gap: 4px;
+      font-size: 12px;
+      margin-top: var(--space-sm);
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumbs a,
+    .breadcrumbs span {
+      padding: 2px 0;
+      white-space: nowrap;
+    }
+
+    .breadcrumbs a:not(:last-child)::after {
+      margin-left: 4px;
+      margin-right: 0;
+    }
+
+    /* Ограничиваем количество видимых крошек на мобильных */
+    .breadcrumbs a:nth-child(n+4):not(:last-child) {
+      display: none;
+    }
+
+    /* Показываем ... перед последним элементом */
+    .breadcrumbs a:nth-child(3):not(:last-child)::after {
+      content: '... →';
+      margin-left: 4px;
+    }
+
+    /* Скрываем стрелку у скрытых элементов */
+    .breadcrumbs a:nth-child(n+4):not(:last-child)::after {
+      content: '';
+      display: none;
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 400px) ===== */
+  @media (max-width: 400px) {
+    .breadcrumbs {
+      font-size: 11px;
+      gap: 3px;
+      margin-top: var(--space-xs);
+      margin-bottom: 4px;
+    }
+
+    .breadcrumbs a:not(:last-child)::after {
+      margin-left: 3px;
+    }
+
+    /* На очень узких показываем только первый и последний */
+    .breadcrumbs a:nth-child(n+2):not(:last-child) {
+      display: none;
+    }
+
+    .breadcrumbs a:first-child:not(:last-child)::after {
+      content: '... →';
+      margin-left: 3px;
+    }
+  }
 </style>

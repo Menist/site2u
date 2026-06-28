@@ -148,6 +148,276 @@ import HeroTitle from '../../src/components/HeroTitle.astro';
       opacity: 1 !important;
     }
   }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: hero
+   ========================================================================== */
+
+  /* ===== Планшеты (до 992px) ===== */
+  @media (max-width: 992px) {
+    .hero {
+      min-height: 90vh;
+    }
+
+    .hero__container {
+      min-height: 90vh;
+      padding: 0 var(--space-md);
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-md);
+      max-width: 100%;
+      padding: 0 var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero__cta {
+      min-width: 240px;
+      height: 54px;
+      padding: 0 var(--space-lg);
+      font-size: var(--font-size-base);
+    }
+
+    .hero__arrow {
+      bottom: 30px;
+    }
+
+    .hero__arrow-icon {
+      width: 20px;
+      height: 20px;
+      border-width: 2.5px;
+    }
+  }
+
+  /* ===== Мобильные (до 768px) ===== */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh; /* Для мобильных браузеров с динамической панелью */
+    }
+
+    .hero__container {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 0 var(--space-sm);
+      justify-content: center;
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    .hero__bg {
+      inset: 0;
+      background-position: center 30%;
+    }
+
+    .hero__overlay {
+      inset: 0;
+    }
+
+    .hero__content {
+      padding: 0;
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-base);
+      padding: 0;
+      margin-bottom: var(--space-md);
+      line-height: var(--line-height-relaxed);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero__cta {
+      min-width: 200px;
+      height: 48px;
+      padding: 0 var(--space-md);
+      font-size: var(--font-size-sm);
+      min-height: var(--touch-target-min);
+    }
+
+    .hero__arrow {
+      bottom: 24px;
+    }
+
+    .hero__arrow-icon {
+      width: 18px;
+      height: 18px;
+      border-width: 2px;
+    }
+  }
+
+  /* ===== Маленькие телефоны (до 480px) ===== */
+  @media (max-width: 480px) {
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .hero__container {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 0 var(--space-xs);
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-lg);
+    }
+
+    .hero__bg {
+      background-position: center 25%;
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-sm);
+      line-height: var(--line-height-relaxed);
+      padding: 0 4px;
+    }
+
+    .hero__cta {
+      min-width: 100%;
+      max-width: 280px;
+      height: 44px;
+      padding: 0 var(--space-sm);
+      font-size: var(--font-size-sm);
+      min-height: var(--touch-target-min);
+      border-radius: var(--radius-sm);
+    }
+
+    .hero__arrow {
+      bottom: 16px;
+    }
+
+    .hero__arrow-icon {
+      width: 16px;
+      height: 16px;
+      border-width: 2px;
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 360px) ===== */
+  @media (max-width: 360px) {
+    .hero__container {
+      padding: 0 6px;
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-md);
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-xs);
+      margin-bottom: var(--space-xs);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .hero__cta {
+      height: 40px;
+      font-size: var(--font-size-xs);
+      max-width: 100%;
+      min-height: 38px;
+    }
+
+    .hero__arrow {
+      bottom: 12px;
+    }
+
+    .hero__arrow-icon {
+      width: 14px;
+      height: 14px;
+      border-width: 1.5px;
+    }
+  }
+
+  /* ==========================================================================
+     ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ
+     ========================================================================== */
+
+  /* Адаптация для экранов с высотой меньше 700px */
+  @media (max-height: 700px) {
+    .hero__container {
+      justify-content: center;
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-lg);
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .hero__cta {
+      height: 44px;
+      min-width: 180px;
+      font-size: var(--font-size-sm);
+    }
+
+    .hero__arrow {
+      bottom: 16px;
+    }
+  }
+
+  /* Адаптация для экранов с высотой меньше 600px */
+  @media (max-height: 600px) {
+    .hero__container {
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-md);
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-xs);
+    }
+
+    .hero__cta {
+      height: 40px;
+      min-width: 160px;
+      font-size: var(--font-size-xs);
+    }
+
+    .hero__arrow {
+      bottom: 12px;
+    }
+
+    .hero__arrow-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  /* Адаптация для устройств с дисплеем notch (iPhone и др.) */
+  @supports (padding: max(0px)) {
+    .hero__container {
+      padding-left: max(var(--space-sm), env(safe-area-inset-left));
+      padding-right: max(var(--space-sm), env(safe-area-inset-right));
+      padding-top: max(var(--space-sm), env(safe-area-inset-top));
+      padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+    }
+  }
+
+  /* Адаптация для поворота экрана на мобильных */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+      min-height: 100vh;
+    }
+
+    .hero__container {
+      min-height: 100vh;
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-md);
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-sm);
+      max-width: 70%;
+      margin-bottom: var(--space-sm);
+    }
+
+    .hero__cta {
+      height: 44px;
+      min-width: 180px;
+      font-size: var(--font-size-sm);
+    }
+
+    .hero__arrow {
+      bottom: 16px;
+    }
+  }
 </style>
 
 <script>

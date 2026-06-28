@@ -133,6 +133,7 @@ const faqItems = [
   color: var(--color-text-secondary);
   max-width: var(--container-sm);
   margin: var(--space-lg) 0;
+  padding-left: var(--space-sm);
 }
   .service-detail__block {
     max-width: var(--container-sm);
@@ -226,6 +227,387 @@ const faqItems = [
     flex-wrap: wrap;
     gap: var(--space-md);
     margin-bottom: var(--space-xl);
+  }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: service-detail (лендинг)
+   ========================================================================== */
+
+  /* ===== Планшеты (до 992px) ===== */
+  @media (max-width: 992px) {
+    .service-detail__lead {
+      font-size: var(--font-size-base);
+      max-width: 100%;
+      margin-bottom: var(--space-md);
+    }
+
+    .service-features__grid {
+      gap: var(--space-sm);
+    }
+
+    .feature-item {
+      padding: var(--space-sm);
+      gap: var(--space-xs);
+    }
+
+    .feature-item p {
+      font-size: var(--font-size-sm);
+    }
+
+    .service-design__grid {
+      gap: var(--space-sm);
+    }
+
+    .design-option {
+      padding: var(--space-sm);
+    }
+
+    .design-option h3 {
+      font-size: var(--font-size-sm);
+    }
+
+    .design-option p {
+      font-size: var(--font-size-sm);
+    }
+
+    .service-detail__block {
+      max-width: 100%;
+      margin-bottom: var(--space-lg);
+    }
+
+    .service-detail__text {
+      font-size: var(--font-size-base);
+      max-width: 100%;
+      margin: var(--space-md) 0;
+    }
+
+    .service-stats {
+      gap: var(--space-sm);
+    }
+
+    .service-stats .stat-block {
+      flex: 1;
+      min-width: 140px;
+    }
+  }
+
+  /* ===== Мобильные (до 768px) ===== */
+  @media (max-width: 768px) {
+    .service-detail__heading-block {
+      margin-bottom: var(--space-sm);
+    }
+
+    .service-detail__rule {
+      width: 80px;
+      height: 2px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .service-detail__lead {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-md);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .service-features {
+      margin-bottom: var(--space-lg);
+    }
+
+    .service-features__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+
+    .feature-item {
+      padding: var(--space-sm);
+      gap: var(--space-xs);
+      border-radius: var(--radius-sm);
+    }
+
+    .feature-item p {
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .feature-item__icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .service-detail__text {
+      font-size: var(--font-size-sm);
+      padding-left: var(--space-md);
+      margin: var(--space-md) 0;
+    }
+
+    .service-design {
+      margin-bottom: var(--space-lg);
+    }
+
+    .service-design__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+
+    .design-option {
+      padding: var(--space-sm);
+      border-radius: var(--radius-sm);
+    }
+
+    .design-option h3 {
+      font-size: var(--font-size-sm);
+      margin-bottom: 4px;
+    }
+
+    .design-option p {
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .service-detail__block {
+      margin-bottom: var(--space-md);
+    }
+
+    .service-detail__block h2 {
+      font-size: var(--font-size-base);
+    }
+
+    .service-detail__block p {
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .service-stats {
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-lg);
+    }
+
+    .service-stats .stat-block {
+      width: 100%;
+      padding: var(--space-sm);
+      min-width: 0;
+    }
+
+    .service-stats .stat-block__number {
+      font-size: var(--font-size-xl);
+    }
+
+    .service-stats .stat-block__label {
+      font-size: var(--font-size-sm);
+    }
+
+    /* Отключаем hover на мобильных */
+    .feature-item:hover,
+    .design-option:hover {
+      transform: none;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    .service-stats .stat-block:hover {
+      transform: none;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    }
+  }
+
+  /* ===== Маленькие телефоны (до 480px) ===== */
+  @media (max-width: 480px) {
+    .service-detail__rule {
+      width: 60px;
+      height: 2px;
+    }
+
+    .service-detail__lead {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .feature-item {
+      padding: var(--space-xs);
+      gap: 4px;
+    }
+
+    .feature-item p {
+      font-size: var(--font-size-xs);
+    }
+
+    .feature-item__icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .service-detail__text {
+      font-size: var(--font-size-xs);
+      padding-left: var(--space-sm);
+      margin: var(--space-sm) 0;
+    }
+
+    .design-option {
+      padding: var(--space-xs);
+    }
+
+    .design-option h3 {
+      font-size: var(--font-size-xs);
+    }
+
+    .design-option p {
+      font-size: var(--font-size-xs);
+    }
+
+    .service-detail__block h2 {
+      font-size: var(--font-size-sm);
+    }
+
+    .service-detail__block p {
+      font-size: var(--font-size-xs);
+    }
+
+    .service-stats .stat-block {
+      padding: var(--space-xs);
+    }
+
+    .service-stats .stat-block__number {
+      font-size: var(--font-size-lg);
+    }
+
+    .service-stats .stat-block__label {
+      font-size: var(--font-size-xs);
+    }
+
+    /* Акцентная граница на мобильных */
+    .block--accent-border {
+      border-left-width: 2px;
+      padding-left: var(--space-sm);
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 360px) ===== */
+  @media (max-width: 360px) {
+    .service-detail__lead {
+      font-size: var(--font-size-xs);
+    }
+
+    .feature-item {
+      padding: 6px;
+    }
+
+    .feature-item p {
+      font-size: var(--font-size-xs);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .feature-item__icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .service-detail__text {
+      font-size: var(--font-size-xs);
+      padding-left: var(--space-xs);
+    }
+
+    .design-option {
+      padding: 6px;
+    }
+
+    .design-option h3 {
+      font-size: var(--font-size-xs);
+    }
+
+    .design-option p {
+      font-size: var(--font-size-xs);
+    }
+
+    .service-detail__block h2 {
+      font-size: var(--font-size-xs);
+    }
+
+    .service-detail__block p {
+      font-size: var(--font-size-xs);
+    }
+
+    .service-stats .stat-block {
+      padding: 6px;
+    }
+
+    .service-stats .stat-block__number {
+      font-size: var(--font-size-base);
+    }
+
+    .service-stats .stat-block__label {
+      font-size: 11px;
+    }
+
+    .block--accent-border {
+      padding-left: 6px;
+    }
+  }
+
+  /* ==========================================================================
+     ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ
+     ========================================================================== */
+
+  /* Адаптация для сетки фич на больших планшетах */
+  @media (min-width: 769px) and (max-width: 992px) {
+    .service-features__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+    }
+
+    .feature-item {
+      padding: var(--space-md);
+    }
+  }
+
+  /* Адаптация для длинных текстов в фичах */
+  @media (max-width: 768px) {
+    .feature-item p {
+      word-break: break-word;
+      hyphens: auto;
+    }
+  }
+
+  /* Адаптация для stat-block в ряд на планшетах */
+  @media (min-width: 769px) and (max-width: 992px) {
+    .service-stats {
+      flex-direction: row;
+      gap: var(--space-sm);
+    }
+
+    .service-stats .stat-block {
+      flex: 1;
+      min-width: 120px;
+    }
+  }
+
+  /* Улучшение читаемости на мобильных */
+  @media (max-width: 768px) {
+    .service-detail__heading-block .page-heading {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-xs);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .service-detail__heading-block .page-heading {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  @media (max-width: 360px) {
+    .service-detail__heading-block .page-heading {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* Отключение hover на touch-устройствах */
+  @media (hover: none) {
+    .feature-item:hover,
+    .design-option:hover,
+    .service-stats .stat-block:hover {
+      transform: none !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07) !important;
+    }
   }
 
 </style>

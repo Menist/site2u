@@ -196,4 +196,366 @@ const advantages = [
     background: var(--color-accent-hover);
     transform: translateY(-2px);
   }
+
+  /* ==========================================================================
+   АДАПТИВНАЯ ВЕРСТКА: uslugi-page (список услуг)
+   ========================================================================== */
+
+  /* ===== Планшеты (до 992px) ===== */
+  @media (max-width: 992px) {
+    .uslugi-page__heading {
+      margin-bottom: var(--space-xl);
+    }
+
+    .uslugi-page__lead {
+      font-size: var(--font-size-base);
+      max-width: 100%;
+      margin-top: var(--space-xs);
+    }
+
+    .uslugi-page__services {
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    .uslugi-teaser {
+      padding: var(--space-md);
+      gap: var(--space-sm);
+    }
+
+    .uslugi-teaser__title {
+      font-size: var(--font-size-lg);
+    }
+
+    .uslugi-teaser__desc {
+      font-size: var(--font-size-sm);
+    }
+
+    .uslugi-teaser__arrow {
+      font-size: var(--font-size-lg);
+    }
+
+    .uslugi-page__advantages {
+      max-width: 100%;
+      margin-bottom: var(--space-md);
+    }
+
+    .uslugi-advantages {
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+
+    .uslugi-advantages__item {
+      font-size: var(--font-size-sm);
+      gap: var(--space-xs);
+    }
+
+    .uslugi-advantages__icon {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+    }
+
+    .uslugi-page__cta-text {
+      max-width: 100%;
+      margin-bottom: var(--space-xl);
+      font-size: var(--font-size-base);
+    }
+
+    .uslugi-page__btn {
+      padding: var(--space-sm) var(--space-lg);
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* ===== Мобильные (до 768px) ===== */
+  @media (max-width: 768px) {
+    .uslugi-page__heading {
+      margin-bottom: var(--space-lg);
+    }
+
+    .uslugi-page__lead {
+      font-size: var(--font-size-sm);
+      margin-top: var(--space-xs);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .uslugi-page__services {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+
+    .uslugi-teaser {
+      padding: var(--space-md);
+      gap: var(--space-sm);
+      border-radius: var(--radius-sm);
+    }
+
+    .uslugi-teaser:hover {
+      transform: none;
+      box-shadow: var(--shadow-card);
+    }
+
+    .uslugi-teaser__title {
+      font-size: var(--font-size-base);
+      margin-bottom: 4px;
+    }
+
+    .uslugi-teaser__desc {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-xs);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .uslugi-teaser__term {
+      font-size: var(--font-size-xs);
+      padding: 3px var(--space-sm);
+    }
+
+    .uslugi-teaser__arrow {
+      font-size: var(--font-size-md);
+    }
+
+    .uslugi-teaser:hover .uslugi-teaser__arrow {
+      transform: none;
+    }
+
+    .uslugi-page__advantages {
+      margin-bottom: var(--space-sm);
+      padding-left: var(--space-md);
+      border-left-width: 2px;
+    }
+
+    .uslugi-advantages {
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+
+    .uslugi-advantages__item {
+      font-size: var(--font-size-sm);
+      gap: var(--space-xs);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .uslugi-advantages__icon {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+    }
+
+    .uslugi-page__cta-text {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-lg);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .uslugi-page__cta {
+      justify-content: center;
+    }
+
+    .uslugi-page__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xs) var(--space-lg);
+      font-size: var(--font-size-sm);
+      min-height: var(--touch-target-min);
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+
+    .uslugi-page__btn:hover {
+      transform: none;
+    }
+  }
+
+  /* ===== Маленькие телефоны (до 480px) ===== */
+  @media (max-width: 480px) {
+    .uslugi-page__heading {
+      margin-bottom: var(--space-md);
+    }
+
+    .uslugi-page__lead {
+      font-size: var(--font-size-sm);
+    }
+
+    .uslugi-page__services {
+      gap: var(--space-xs);
+      margin-bottom: var(--space-md);
+    }
+
+    .uslugi-teaser {
+      padding: var(--space-sm);
+      gap: var(--space-xs);
+      flex-wrap: wrap;
+    }
+
+    .uslugi-teaser__body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .uslugi-teaser__title {
+      font-size: var(--font-size-base);
+    }
+
+    .uslugi-teaser__desc {
+      font-size: var(--font-size-xs);
+      margin-bottom: 4px;
+    }
+
+    .uslugi-teaser__term {
+      font-size: 11px;
+      padding: 2px var(--space-xs);
+    }
+
+    .uslugi-teaser__arrow {
+      font-size: var(--font-size-base);
+      align-self: center;
+    }
+
+    .uslugi-page__advantages {
+      padding-left: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .uslugi-advantages__item {
+      font-size: var(--font-size-xs);
+      gap: 4px;
+    }
+
+    .uslugi-advantages__icon {
+      width: 14px;
+      height: 14px;
+      margin-top: 2px;
+    }
+
+    .uslugi-page__cta-text {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .uslugi-page__btn {
+      padding: var(--space-xs) var(--space-md);
+      font-size: var(--font-size-sm);
+      max-width: 100%;
+      min-height: var(--touch-target-min);
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 360px) ===== */
+  @media (max-width: 360px) {
+    .uslugi-page__lead {
+      font-size: var(--font-size-xs);
+    }
+
+    .uslugi-teaser {
+      padding: var(--space-xs);
+      gap: 4px;
+    }
+
+    .uslugi-teaser__title {
+      font-size: var(--font-size-sm);
+    }
+
+    .uslugi-teaser__desc {
+      font-size: var(--font-size-xs);
+    }
+
+    .uslugi-teaser__term {
+      font-size: 10px;
+      padding: 2px 6px;
+    }
+
+    .uslugi-teaser__arrow {
+      font-size: var(--font-size-sm);
+    }
+
+    .uslugi-page__advantages {
+      padding-left: var(--space-xs);
+    }
+
+    .uslugi-advantages__item {
+      font-size: var(--font-size-xs);
+      gap: 4px;
+    }
+
+    .uslugi-advantages__icon {
+      width: 12px;
+      height: 12px;
+    }
+
+    .uslugi-page__cta-text {
+      font-size: var(--font-size-xs);
+    }
+
+    .uslugi-page__btn {
+      font-size: var(--font-size-xs);
+      padding: 6px var(--space-sm);
+      min-height: 38px;
+    }
+  }
+
+  /* ==========================================================================
+     ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ
+     ========================================================================== */
+
+  /* Адаптация для сетки тизеров на планшетах */
+  @media (min-width: 769px) and (max-width: 992px) {
+    .uslugi-page__services {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+    }
+
+    .uslugi-teaser {
+      padding: var(--space-md);
+    }
+  }
+
+  /* Улучшение читаемости заголовка страницы */
+  @media (max-width: 768px) {
+    .uslugi-page__heading .page-heading {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-xs);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .uslugi-page__heading .page-heading {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  @media (max-width: 360px) {
+    .uslugi-page__heading .page-heading {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  /* Отключение hover на touch-устройствах */
+  @media (hover: none) {
+    .uslugi-teaser:hover {
+      transform: none !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+
+    .uslugi-teaser:hover .uslugi-teaser__arrow {
+      transform: none !important;
+    }
+
+    .uslugi-page__btn:hover {
+      transform: none !important;
+    }
+  }
+
+  /* Адаптация для длинных текстов в преимуществах */
+  @media (max-width: 480px) {
+    .uslugi-advantages__item span {
+      word-break: break-word;
+      hyphens: auto;
+    }
+  }
+
 </style>

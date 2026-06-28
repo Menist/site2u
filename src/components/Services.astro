@@ -78,9 +78,192 @@ import ServiceCard from './ServiceCard.astro';
     gap: var(--space-lg);
   }
 
+  /* ==========================================================================
+     АДАПТИВНАЯ ВЕРСТКА: services
+     ========================================================================== */
+
+  /* ===== Планшеты (до 992px) ===== */
+  @media (max-width: 992px) {
+    .services__grid {
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .services__grid .service-card {
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .services__header {
+      margin-bottom: var(--space-md);
+    }
+  }
+
+  /* ===== Мобильные (до 768px) ===== */
   @media (max-width: 768px) {
     .services__grid {
-      grid-template-columns: 1fr;
+      flex-direction: column;
+      gap: var(--space-sm);
+      align-items: stretch;
+    }
+
+    .services__grid .service-card {
+      width: 100%;
+      max-width: 100%;
+      padding: var(--space-md);
+    }
+
+    .services__header {
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Убираем hover-эффекты на мобильных */
+    .services__grid .service-card:hover {
+      transform: none;
+      box-shadow: var(--shadow-card);
+    }
+
+    .services__grid .service-card--primary:hover {
+      transform: none;
+      box-shadow: var(--shadow-card);
+    }
+  }
+
+  /* ===== Маленькие телефоны (до 480px) ===== */
+  @media (max-width: 480px) {
+    .services__grid {
+      gap: var(--space-sm);
+    }
+
+    .services__grid .service-card {
+      padding: var(--space-sm);
+    }
+
+    .services__header {
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Адаптация иконок */
+    .services__grid .service-card__icon svg {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  /* ===== Очень узкие экраны (до 360px) ===== */
+  @media (max-width: 360px) {
+    .services__grid .service-card {
+      padding: var(--space-xs);
+    }
+
+    .services__grid .service-card__icon svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  /* ==========================================================================
+     ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ
+     ========================================================================== */
+
+  /* Если карточки должны быть в 2 колонки на больших экранах */
+  @media (min-width: 993px) {
+    .services__grid {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      align-items: stretch;
+    }
+
+    .services__grid .service-card {
+      width: calc(50% - var(--space-lg) / 2);
+      max-width: 560px;
+    }
+
+    /* Выравнивание высоты карточек */
+    .services__grid .service-card {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      min-height: 100%;
+    }
+
+    .services__grid .service-card__body {
+      flex: 0 1 auto;
+    }
+
+    .services__grid .service-card__list {
+      flex: 1 0 auto;
+    }
+
+    .services__grid .service-card__footer {
+      margin-top: auto;
+    }
+  }
+
+  /* Для экранов между 769px и 992px (планшеты) */
+  @media (min-width: 769px) and (max-width: 992px) {
+    .services__grid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-md);
+    }
+
+    .services__grid .service-card {
+      width: calc(50% - var(--space-md) / 2);
+      max-width: 440px;
+    }
+  }
+
+  /* Улучшение читаемости на мобильных */
+  @media (max-width: 768px) {
+    .services__grid .service-card__list {
+      text-align: left;
+      padding-left: 0;
+    }
+
+    .services__grid .service-card__list li {
+      text-align: left;
+    }
+
+    .services__grid .service-card__for {
+      text-align: center;
+    }
+
+    .services__grid .service-card__term {
+      text-align: center;
+    }
+
+    .services__grid .service-card__btn {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  /* Адаптация для очень длинных текстов в списке */
+  @media (max-width: 480px) {
+    .services__grid .service-card__list li {
+      word-break: break-word;
+      hyphens: auto;
+    }
+  }
+
+  /* Адаптация для устройств с сенсорным управлением */
+  @media (hover: none) {
+    .services__grid .service-card:hover {
+      transform: none !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+
+    .services__grid .service-card--primary:hover {
+      transform: none !important;
+      box-shadow: var(--shadow-card) !important;
+    }
+
+    .services__grid .service-card__btn:hover {
+      transform: none !important;
     }
   }
 </style>
