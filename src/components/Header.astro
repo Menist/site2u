@@ -1,5 +1,4 @@
 ---
-// src/components/Header.astro
 import MobileMenu from './MobileMenu.astro';
 
 const { transparent = false } = Astro.props;
@@ -13,6 +12,15 @@ const navItems = [
   {label: "О нас", href: "/o-nas"},
   {label: "Контакты", href: "/kontakty"},
 ]
+
+// Убираем trailing slash, чтобы /uslugi/ и /uslugi совпадали
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+// Функция: / совпадает точно, остальные — по startsWith
+function isActive(href: string) {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(href + '/');
+}
 ---
 
 <header class={`header ${transparent ? 'header--transparent' : ''}`}>
@@ -22,7 +30,7 @@ const navItems = [
           <li class="hero__nav-item">
             <a
                 href={el.href}
-                class={`hero__nav-link ${el.href === Astro.url.pathname ? 'active' : ''}`}
+                class={`hero__nav-link ${isActive(el.href) ? 'active' : ''}`}
             >
               {el.label}
             </a>
@@ -39,7 +47,7 @@ const navItems = [
           <li class="hero__nav-item">
             <a
                 href={el.href}
-                class={`hero__nav-link ${el.href === Astro.url.pathname ? 'active' : ''}`}
+                class={`hero__nav-link ${isActive(el.href) ? 'active' : ''}`}
             >
               {el.label}
             </a>
@@ -150,6 +158,16 @@ const navItems = [
 
   .header:not(.header--transparent) .hero__nav-link:hover {
     color: var(--color-accent);
+  }
+
+  /* Активная страница — желтая ссылка на обычном хедере */
+  .header:not(.header--transparent) .hero__nav-link.active {
+    color: var(--color-accent-hover);
+  }
+
+  .header:not(.header--transparent) .hero__nav-link.active:hover {
+    opacity: 1;
+    color: var(--color-accent-hover);
   }
 
   /* ===== Бургер-меню (кнопка) ===== */

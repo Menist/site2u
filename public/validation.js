@@ -5,8 +5,6 @@
 (function() {
   "use strict";
 
-  console.log('✅ validation.js loaded');
-
   const CONFIG = {
     patterns: {
       phone: /^(\+375|375|80)(29|25|44|33|17)\d{7}$/,
@@ -338,7 +336,6 @@
 
   // ── Инициализация всех форм ──
   function initAllForms() {
-    console.log('🔍 Поиск форм...');
 
     const modalForm = document.getElementById('modalContactForm');
     if (modalForm) {
