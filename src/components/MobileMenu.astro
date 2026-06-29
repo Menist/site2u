@@ -5,6 +5,13 @@ interface NavItem {
 }
 
 const { navItems } = Astro.props as { navItems: NavItem[] };
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(href + '/');
+}
 ---
 
 <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Мобильное меню">
@@ -26,7 +33,7 @@ const { navItems } = Astro.props as { navItems: NavItem[] };
           <li class="mobile-menu__item">
             <a
                 href={item.href}
-                class={`mobile-menu__link ${item.href === Astro.url.pathname ? 'active' : ''}`}
+                class={`mobile-menu__link ${isActive(item.href) ? 'active' : ''}`}
                 data-mobile-link
             >
               {item.label}
