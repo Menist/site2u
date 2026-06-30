@@ -102,7 +102,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
       console.error('❌ EmailJS не доступен');
       const statusEl = document.getElementById('modalStatus');
       if (statusEl) {
-        statusEl.textContent = 'Ошибка загрузки сервиса. Напишите напрямую на hello@site2u.by';
+        statusEl.textContent = 'Ошибка загрузки сервиса. Напишите напрямую на imc@imc.by';
         statusEl.className = 'contacts__status is-error';
       }
       return;
@@ -174,7 +174,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
         setTimeout(() => { closeModal(); window.__configurator?.showSuccessScreen?.(); }, 1500);
       } catch (err) {
         console.error('EmailJS error:', err);
-        showStatus('Ошибка отправки. Напишите напрямую на hello@site2u.by', 'error');
+        showStatus('Ошибка отправки. Напишите напрямую на imc@imc.by', 'error');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = DEFAULT_BUTTON_TEXT;
@@ -189,12 +189,12 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
       const questions = [
         {
           key: 'siteType',
-          title: 'Какой сайт хотите создать?',
+          title: 'Какой веб‑сайт хотите создать?',
           multiple: false,
           options: [
-            {value: 'Лендинг', description: 'Одностраничный сайт'},
-            {value: 'Сайт услуг', description: 'Для компаний и специалистов'},
-            {value: 'Многостраничный сайт', description: 'Корпоративный сайт'},
+            {value: 'Лендинг', description: 'Одностраничный веб‑сайт'},
+            {value: 'Веб‑сайт услуг', description: 'Для компаний и специалистов'},
+            {value: 'Многостраничный веб‑сайт', description: 'Корпоративный веб‑сайт'},
             {value: 'Не уверен', description: ''}
           ]
         },
@@ -217,7 +217,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
           options: [
             {value: 'SEO', description: 'Техническая подготовка к продвижению'},
             {value: 'Аналитика', description: 'Google Analytics и Яндекс.Метрика'},
-            {value: 'CMS', description: 'Самостоятельное редактирование сайта'},
+            {value: 'CMS', description: 'Самостоятельное редактирование веб‑сайта'},
             {value: 'Пока не решил', description: ''}
           ]
         }
@@ -289,7 +289,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
             <p class="configurator__helper">Проверьте параметры перед отправкой заявки.</p>
             <div class="configurator__summary-list">
               <div class="configurator__summary-item">
-                <span class="configurator__summary-name">Тип сайта</span>
+                <span class="configurator__summary-name">Тип веб‑сайта</span>
                 <strong>${state.siteType ?? '—'}</strong>
               </div>
               <div class="configurator__summary-item">
@@ -422,7 +422,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
   }
 
   .configurator__card {
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-full);
     padding: var(--space-xl);
     min-height: 200px;
     overflow: hidden;

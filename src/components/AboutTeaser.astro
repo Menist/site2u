@@ -1,21 +1,24 @@
 ---
 const stats = [
-  { number: '2001', label: 'IMC Computers работает с 2001 года' },
-  { number: '24+', label: 'года на рынке Беларуси' },
-  { number: '3', label: 'направления работы' },
+  // { number: '2001', label: 'IMC COMPUTERS работает с 2001 года' },
+  { number: '25+', label: 'года на рынке Беларуси' },
+  // { number: '3', label: 'направления работы' },
   { number: 'B2B', label: 'работаем с бизнесом' }
 ];
 ---
 <section class="about-teaser section--padded">
   <div class="container">
     <h2 class="section-heading">О нас </h2>
-    <p class="section-heading__subtitle">Веб-направление <a href="https://www.imc.by" target="_blank" rel="noopener" class="about-page__link" data-astro-cid-zhe6yam7="">IMC Computers</a>— создаём лендинги и сайты услуг, подбирая решение под задачи каждого бизнеса. </p>
+    <p class="section-heading__subtitle">Веб-направление <a href="https://www.imc.by" target="_blank" rel="noopener" class="about-page__link" data-astro-cid-zhe6yam7="">IMC COMPUTERS</a>— создаём веб‑сайты услуг, лендинги, сайты-визитки, промо-страницы и каталоги, подбирая решение под задачи каждого бизнеса. </p>
     <div class="about-teaser__grid">
       <div class="about-teaser__text">
-        <h3 class="block-heading">Разрабатываем сайты для бизнеса с понятным процессом и прозрачными условиями.</h3>
-        <p>SITE2U — веб-направление IMC Computers. Работаем на базе компании с более чем 24-летним опытом, офисом в Минске и фокусом на B2B-проектах.</p>
-        <p>Наш фокус — сайты услуг, представительские сайты и лендинги.</p>
-        <a href="/o-nas" class="about-teaser__link">Подробнее о нас →</a>
+        <h3 class="block-heading">Разрабатываем веб‑сайты для бизнеса с понятным процессом и прозрачными условиями.</h3>
+        <p class="about-teaser__title">SITE2U — веб-направление IMC COMPUTERS</p>
+        <ul class="about-teaser__list">
+          <li>Офис — Минск</li>
+          <li>Акцент — B2B-проекты</li>
+          <li>Специализация — веб‑сайты услуг, представительские веб‑сайт и лендинги</li>
+        </ul>
       </div>
 
       <div class="about-teaser__stats">
@@ -30,6 +33,33 @@ const stats = [
   </div>
 </section>
 <style>
+  .about-teaser__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .about-teaser__list li {
+    color: var(--color-text-secondary);
+    padding-left: var(--space-sm);
+    position: relative;
+  }
+
+  .about-teaser__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: var(--radius-circle);
+    background: var(--color-accent);
+  }
+  .about-teaser__title{
+
+  }
   .about-teaser{
     background: var(--color-bg-secondary);
   }

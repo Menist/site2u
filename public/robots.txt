@@ -1,12 +1,4 @@
 User-agent: *
-Disallow: /
-
-# Для Google
-User-agent: Googlebot
-Disallow: /
-
-# Для Яндекса
-User-agent: Yandex
-Disallow: /
+Allow: /
 
 Sitemap: https://site2u.by/sitemap-index.xml

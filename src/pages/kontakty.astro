@@ -4,7 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const breadcrumbItems = [
   { label: "Главная", href: "/" },
-  { label: "Контакты", href: "/kontakty" },
+  { label: "Контакты", href: "/kontakty/" },
 ];
 
 const serviceId = import.meta.env.EMAILJS_SERVICE_ID;
@@ -26,14 +26,14 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
             <span class="service-detail__rule"></span>
 
             <div class="contacts__group">
-              <a href="tel:+375296195265" class="contacts__link" data-track="click_phone_contacts">+375 (29) 619-52-65</a>
-              <a href="mailto:hello@site2u.by" class="contacts__link" data-track="click_email_contacts">hello@site2u.by</a>
+              <a href="tel:+375293195265" class="contacts__link" data-track="click_phone_contacts">+375 (29) 319-52-65</a>
+              <a href="mailto:imc@imc.by" class="contacts__link" data-track="click_email_contacts">imc@imc.by</a>
             </div>
 
             <p class="contacts__address">Офис в Минске. Работаем с клиентами по всей Беларуси.</p>
 
             <div class="contacts__socials">
-              <a href="https://t.me/твой_ник" class="contacts__social" data-track="click_telegram">
+              <a href="https://t.me/imc_by" class="contacts__social" data-track="click_telegram">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                   <path d="M21.6 3.8L18.2 20.1C17.9 21.3 17.2 21.6 16.2 21L11.7 17.7L9.5 19.8C9.2 20.1 9 20.4 8.4 20.4L8.7 15.7L17.4 7.8C17.8 7.4 17.5 7.2 17 7.6L6.3 14.3L1.7 12.8C0.7 12.5 0.7 11.8 1.9 11.3L20.1 4.3C21 4 21.8 4.5 21.6 3.8Z" fill="currentColor"/>
                 </svg>
@@ -249,7 +249,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--color-divider);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
     font-size: var(--font-size-base);
@@ -423,7 +423,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
   .contacts__map {
     position: relative;
     flex: 1;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-full);
     overflow: hidden;
     border: 1px solid var(--color-divider);
     min-height: 200px;
@@ -460,7 +460,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
     padding: var(--space-sm) var(--space-md);
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--color-accent);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-full);
     box-shadow: var(--shadow-card);
     max-width: 280px;
   }
@@ -1057,7 +1057,7 @@ const publicKey = import.meta.env.EMAILJS_PUBLIC_KEY;
         form.querySelectorAll('.field-error, .field-hint').forEach(el => el.remove());
       } catch (err) {
         console.error('EmailJS error:', err);
-        showStatus('Ошибка отправки. Напишите напрямую на hello@site2u.by', 'error');
+        showStatus('Ошибка отправки. Напишите напрямую на imc@imc.by', 'error');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Отправить';

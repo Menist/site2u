@@ -16,39 +16,40 @@ AddDefaultCharset UTF-8
     </FilesMatch>
 
     # Content Security Policy
-    Header set Content-Security-Policy "\
-        default-src 'self'; \
-        upgrade-insecure-requests; \
-        frame-ancestors 'self'; \
-        script-src 'self' 'unsafe-inline' 'unsafe-eval' \
-            https://mc.yandex.ru \
-            https://mc.yandex.com \
-            https://mc.yandex.by \
-            https://www.googletagmanager.com \
-            https://www.google-analytics.com \
-            https://cdn.jsdelivr.net \
-            https://cdn.emailjs.com; \
-        style-src 'self' 'unsafe-inline'; \
-        img-src 'self' https: data: \
-            https://mc.yandex.ru \
-            https://mc.yandex.com \
-            https://mc.yandex.by; \
-        font-src 'self'; \
-        connect-src 'self' https: wss: \
-            https://api.emailjs.com \
-            https://mc.yandex.ru \
-            https://mc.yandex.com \
-            https://mc.yandex.by \
-            wss://mc.yandex.ru \
-            wss://mc.yandex.com \
-            https://www.google-analytics.com; \
-        frame-src 'self' \
-            https://yandex.ru \
-            https://api-maps.yandex.ru; \
-        worker-src 'self' blob:; \
-        object-src 'none'; \
-        base-uri 'self'; \
-        form-action 'self';"
+Header set Content-Security-Policy "\
+    default-src 'self'; \
+    upgrade-insecure-requests; \
+    frame-ancestors 'self'; \
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' \
+        https://mc.yandex.ru \
+        https://mc.yandex.com \
+        https://mc.yandex.by \
+        https://www.googletagmanager.com \
+        https://www.google-analytics.com \
+        https://cdn.jsdelivr.net \
+        https://cdn.emailjs.com \
+        https://cdnjs.cloudflare.com; \
+    style-src 'self' 'unsafe-inline'; \
+    img-src 'self' https: data: \
+        https://mc.yandex.ru \
+        https://mc.yandex.com \
+        https://mc.yandex.by; \
+   font-src 'self' data:; \
+    connect-src 'self' https: wss: \
+        https://api.emailjs.com \
+        https://mc.yandex.ru \
+        https://mc.yandex.com \
+        https://mc.yandex.by \
+        wss://mc.yandex.ru \
+        wss://mc.yandex.com \
+        https://www.google-analytics.com; \
+    frame-src 'self' \
+        https://yandex.ru \
+        https://api-maps.yandex.ru; \
+    worker-src 'self' blob:; \
+    object-src 'none'; \
+    base-uri 'self'; \
+    form-action 'self';"
 
     # Защита от clickjacking
     Header always set X-Frame-Options "SAMEORIGIN"
@@ -86,7 +87,6 @@ AddDefaultCharset UTF-8
 <FilesMatch "\.(sql|log|env|yml|yaml)$">
     Require all denied
 </FilesMatch>
-
 # ===================================================
 # РЕДИРЕКТЫ И МАРШРУТИЗАЦИЯ
 # ===================================================
@@ -94,27 +94,34 @@ AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # HTTP → HTTPS
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
+    # Существующие файлы отдаём как есть
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
+    # Существующие директории отдаём как есть
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
-</IfModule>
 
+    # Редирект без слеша → со слешем (только если такая папка существует)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !(.*)/$
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+    RewriteRule ^(.*)$ /$1/ [R=301,L]
+
+    # Fallback: /page/ → /page/index.html (только если файл реально существует)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+    RewriteRule ^(.+[^/])/?$ /$1/index.html [L]
+</IfModule>
 # ===================================================
 # ОБРАБОТКА ОШИБОК
 # ===================================================
 
 ErrorDocument 404 /404.html
-
-# ===================================================
-# СКРЫТЬ ВЕРСИЮ СЕРВЕРА
-# ===================================================
-
-ServerSignature Off
 
 # ===================================================
 # КЕШИРОВАНИЕ (производительность)

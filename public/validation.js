@@ -275,10 +275,7 @@
 
   // ── Инициализация формы ──
   function initForm(form) {
-    console.log('✅ Инициализация формы:', form.id || 'форма без ID');
-
     const fields = form.querySelectorAll('[data-validate], [required]');
-    console.log('Найдено полей для валидации:', fields.length);
 
     fields.forEach(field => {
       field.addEventListener('input', function() {
@@ -330,7 +327,6 @@
         }
         return false;
       }
-      console.log('✅ Форма валидна, отправляем...');
     });
   }
 
@@ -339,13 +335,11 @@
 
     const modalForm = document.getElementById('modalContactForm');
     if (modalForm) {
-      console.log('✅ Найдена форма modalContactForm');
       initForm(modalForm);
     }
 
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-      console.log('✅ Найдена форма contactForm');
       initForm(contactForm);
     }
   }

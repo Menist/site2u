@@ -51,7 +51,8 @@
   /* ── Радиус скруглений ── */
   --radius-sm: 12px;
   --radius-lg: 30px;
-  --radius-full: 999px;
+  /*--radius-full: 999px;*/
+  --radius-full: var(--radius-sm);
   --radius-circle: 50%;
 
   /* ── Тени ── */

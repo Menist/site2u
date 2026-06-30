@@ -12,7 +12,7 @@ const organizationSchema = {
   "name": "site2u.by",
   "url": "https://site2u.by",
   "telephone": "+375296195265",
-  "email": "hello@site2u.by",
+  "email": "imc@imc.by",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "пр. Независимости, д. 68-2, к.108",
@@ -26,7 +26,7 @@ interface Props {
   description: string;
   serviceSchema?: object;
   transparent?: boolean
-  bodyClass: string
+  bodyClass?: string
 }
 
 const {title, description, serviceSchema, transparent = false} = Astro.props;
@@ -37,7 +37,13 @@ const { bodyClass = '' } = Astro.props;
 <!doctype html>
 <html lang="ru">
 <head>
+  <!-- 1. Кодировка — всегда первой -->
   <meta charset="UTF-8"/>
+
+  <!-- 2. Viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- 3. Критичные инлайн-стили (js-loading) -->
   <style is:global>
     .js-loading .hero__subtitle,
     .js-loading .hero__cta,
@@ -54,29 +60,50 @@ const { bodyClass = '' } = Astro.props;
       transform: translateY(35px) !important;
     }
   </style>
+
+  <!-- 4. Скрипт js-loading (инлайн, блокирующий — это правильно) -->
   <script is:inline>
     document.documentElement.classList.add('js-loading');
   </script>
 
-  <meta name="viewport" content="width=device-width"/>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-  <link rel="icon" href="/favicon.ico"/>
-  <meta name="generator" content={Astro.generator}/>
+  <!-- 5. Title и мета -->
   <title>{title}</title>
   <meta name="description" content={description}/>
+  <meta name="generator" content={Astro.generator}/>
+  <meta name="google-site-verification" content="xTSWs3ffQhgcm-tiYO9HUXO1Qh3iPW0TaNlNgdw703U" />
+  <meta name="yandex-verification" content="ad8369549c1620cd" />
+
+  <!-- 6. Canonical и OG -->
   <link rel="canonical" href={canonicalURL}/>
   <meta property="og:title" content={title}/>
   <meta property="og:description" content={description}/>
   <meta property="og:url" content={canonicalURL}/>
   <meta property="og:image" content={ogImageURL}/>
   <meta property="og:type" content="website"/>
+
+  <!-- 7. Фавиконки -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+  <link rel="icon" href="/favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+
+  <!-- 8. Schema.org -->
   <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}/>
   {serviceSchema && (
-    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)}/>
   )}
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- 9. CSS -->
   <link rel="stylesheet" href="/animations.css"/>
+
+  <!-- 10. Скрипты defer -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="/animations.js"></script>
+  <script defer src="/validation.js"></script>
+
+  <!-- 11. Аналитика (последней, через idle) -->
   <script is:inline>
     function loadAnalytics() {
       // Google Analytics
@@ -123,6 +150,7 @@ const { bodyClass = '' } = Astro.props;
     <div><img src="https://mc.yandex.ru/watch/110113534" style="position:absolute;left:-9999px;" alt=""/></div>
   </noscript>
 
+  <!-- 12. Трекинг кликов -->
   <script is:inline>
     document.addEventListener('click', function (e) {
       const target = e.target.closest('[data-track]');
@@ -142,7 +170,6 @@ const { bodyClass = '' } = Astro.props;
       }
     });
   </script>
-  <script defer src="/validation.js"></script>
 </head>
 <body class={bodyClass}>
 <Header transparent={transparent}/>

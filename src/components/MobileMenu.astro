@@ -8,9 +8,10 @@ const { navItems } = Astro.props as { navItems: NavItem[] };
 
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
-function isActive(href: string): boolean {
-  if (href === '/') return pathname === '/';
-  return pathname === href || pathname.startsWith(href + '/');
+function isActive(href: string) {
+  const cleanHref = href.replace(/\/$/, '') || '/';
+  if (cleanHref === '/') return pathname === '/';
+  return pathname === cleanHref || pathname.startsWith(cleanHref + '/');
 }
 ---
 
@@ -43,7 +44,7 @@ function isActive(href: string): boolean {
     </ul>
 
     <div class="mobile-menu__footer">
-      <a href="/kontakty" class="mobile-menu__cta" data-mobile-link data-track="mobile_menu_cta">
+      <a href="/kontakty/" class="mobile-menu__cta" data-mobile-link data-track="mobile_menu_cta">
         Обсудить проект
       </a>
     </div>

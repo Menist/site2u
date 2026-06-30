@@ -4,24 +4,24 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 
 const breadcrumbItems = [
   {label: "Главная", href: "/"},
-  {label: "О нас", href: "/o-nas"},
+  {label: "О нас", href: "/o-nas/"},
 ];
 
 const stats = [
-  { number: '2001', label: 'IMC Computers работает с 2001 года' },
-  { number: '24+', label: 'более 24 лет на рынке Беларуси' },
-  { number: '3', label: 'направления работы' },
+  // { number: '2001', label: 'IMC COMPUTERS работает с 2001 года' },
+  { number: '25+', label: 'более 25 лет на рынке Беларуси' },
+  // { number: '3', label: 'направления работы' },
   { number: 'B2B', label: 'работаем с бизнесом' },
 ];
 ---
-<Layout title="О компании site2u.by — веб-направление IMC Computers"
-        description="site2u.by — веб-направление IMC Computers, 2001 год основания, 24+ года на рынке Беларуси, B2B-фокус">
+<Layout title="О компании site2u.by — веб-направление IMC COMPUTERS"
+        description="site2u.by — веб-направление IMC COMPUTERS, 2001 год основания, 25+ года на рынке Беларуси, B2B-фокус">
   <Breadcrumbs items={breadcrumbItems} />
 
   <div class="about-page page--padded">
     <div class="container">
     <div class="about-page__heading">
-      <h1 class="page-heading">Создаём сайты для бизнеса с понятными условиями и прозрачным процессом</h1>
+      <h1 class="page-heading">Создаём веб‑сайты для бизнеса с понятными условиями и прозрачным процессом</h1>
       <span class="service-detail__rule"></span>
     </div>
 
@@ -38,15 +38,15 @@ const stats = [
       <div class="about-page__text">
         <p class="about-page__lead">
           SITE2U — веб-направление компании
-          <a href="https://www.imc.by" target="_blank" rel="noopener" class="about-page__link">IMC Computers</a>.
-          Мы создаём лендинги и сайты услуг для малого и среднего бизнеса:
+          <a href="https://www.imc.by" target="_blank" rel="noopener" class="about-page__link">IMC COMPUTERS</a>.
+          Мы создаём лендинги, сайты-визитки, каталоги и веб‑сайты услуг для малого и среднего бизнеса:
           клиник, студий, кафе, салонов, сервисных компаний и агентств.
         </p>
         <p class="about-page__copy">
           Каждый проект начинается с обсуждения задач бизнеса. Вместе определяем объём работ, согласовываем этапы разработки и подключаем только те решения, которые действительно нужны вашему сайту.
         </p>
         <p class="about-page__copy">
-          Наш фокус — сайт, который помогает представить бизнес в интернете понятно и профессионально, рассказать о компании, услугах и способах связи с клиентами.
+          Наш фокус — веб‑сайт, который помогает представить бизнес в интернете понятно и профессионально, рассказать о компании, услугах и способах связи с клиентами.
         </p>
       </div>
 
@@ -55,15 +55,15 @@ const stats = [
         <ul class="about-page__list">
           <li class="about-page__item">Сначала обсуждаем задачи, объём работ и этапы разработки.</li>
           <li class="about-page__item">После каждого этапа показываем результат и согласуем правки.</li>
-          <li class="about-page__item">Если готового дизайна нет, поможем разработать его до начала создания сайта</li>
-          <li class="about-page__item">После запуска остаёмся на связи и помогаем, если возникают вопросы по работе сайта</li>
+          <li class="about-page__item">Если готового дизайна нет, поможем разработать его до начала создания веб‑сайта</li>
+          <li class="about-page__item">После запуска остаёмся на связи и помогаем, если возникают вопросы по работе веб‑сайта</li>
         </ul>
       </aside>
     </div>
 
     <div class="about-page__cta">
-      <a href="/kontakty" class="about-page__btn">Связаться с нами</a>
-      <a href="/uslugi" class="about-page__secondary">Смотреть услуги →</a>
+      <a href="/kontakty/" class="about-page__btn">Связаться с нами</a>
+      <a href="/uslugi/" class="about-page__secondary">Смотреть услуги →</a>
     </div>
 
   </div>
